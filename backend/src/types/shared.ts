@@ -32,7 +32,7 @@ export interface Entity {
   name: string;
   fields: EntityField[];
   relationships?: EntityRelationship[];
-  examples?: any[];
+  examples?: Record<string, any>[];
   metadata?: {
     color?: string;
     description?: string;

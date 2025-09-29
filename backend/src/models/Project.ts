@@ -88,7 +88,7 @@ const ProjectSchema = new Schema({
   entities: {
     type: [EntitySchema],
     validate: {
-      validator: function(entities: any[]) {
+      validator: function(entities: IProject['entities']) {
         return entities.length > 0;
       },
       message: 'At least one entity is required'
@@ -97,7 +97,7 @@ const ProjectSchema = new Schema({
   roles: {
     type: [RoleSchema],
     validate: {
-      validator: function(roles: any[]) {
+      validator: function(roles: IProject['roles']) {
         return roles.length > 0;
       },
       message: 'At least one role is required'
@@ -106,7 +106,7 @@ const ProjectSchema = new Schema({
   features: {
     type: [FeatureSchema],
     validate: {
-      validator: function(features: any[]) {
+      validator: function(features: IProject['features']) {
         return features.length > 0;
       },
       message: 'At least one feature is required'
@@ -140,20 +140,20 @@ ProjectSchema.index({
 ProjectSchema.index({ createdBy: 1, createdAt: -1 });
 
 // Virtuals
-ProjectSchema.virtual('entityCount').get(function() {
+ProjectSchema.virtual('entityCount').get(function(this: IProject) {
   return this.entities.length;
 });
 
-ProjectSchema.virtual('roleCount').get(function() {
+ProjectSchema.virtual('roleCount').get(function(this: IProject) {
   return this.roles?.length || 0;
 });
 
-ProjectSchema.virtual('featureCount').get(function() {
+ProjectSchema.virtual('featureCount').get(function(this: IProject) {
   return this.features.length;
 });
 
 // Pre-save middleware
-ProjectSchema.pre('save', function(next) {
+ProjectSchema.pre('save', function(this: IProject, next: () => void) {
   // Ensure app name is properly formatted
   if (this.isModified('appName')) {
     this.appName = this.appName.trim();
@@ -189,13 +189,13 @@ ProjectSchema.statics.searchProjects = function(query: string) {
 };
 
 // Instance methods
-ProjectSchema.methods.addEntity = function(entity: any) {
+ProjectSchema.methods.addEntity = function(entity: IProject['entities'][0]) {
   this.entities.push(entity);
   return this.save();
 };
 
 ProjectSchema.methods.removeEntity = function(entityName: string) {
-  this.entities = this.entities.filter((e: any) => e.name !== entityName);
+  this.entities = this.entities.filter((e: IProject['entities'][0]) => e.name !== entityName);
   return this.save();
 };
 
@@ -210,11 +210,19 @@ export interface IProject extends Document {
       name: string;
       type: string;
       required: boolean;
-      validation?: any;
-      metadata?: any;
+      validation?: {
+        options?: string[];
+      };
+      metadata?: {
+        helpText?: string;
+      };
     }>;
     relationships?: string[];
-    metadata?: any;
+    metadata?: {
+      description?: string;
+      isNew?: boolean;
+      isRemoved?: boolean;
+    };
   }>;
   roles: Array<{
     name: string;
@@ -245,7 +253,7 @@ export interface IProject extends Document {
   featureCount: number;
 
   // Instance methods
-  addEntity(entity: any): Promise<IProject>;
+  addEntity(entity: IProject['entities'][0]): Promise<IProject>;
   removeEntity(entityName: string): Promise<IProject>;
 }
 

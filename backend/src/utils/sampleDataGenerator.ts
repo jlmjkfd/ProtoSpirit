@@ -8,15 +8,15 @@ import type { Entity, EntityField } from '../types';
 /**
  * Generates sample data for an entity based on its fields
  */
-export function generateSampleData(entity: Entity, count: number = 3): any[] {
+export function generateSampleData(entity: Entity, count: number = 3): Record<string, any>[] {
   if (!entity.fields || entity.fields.length === 0) {
     return [];
   }
 
-  const sampleData: any[] = [];
+  const sampleData: Record<string, any>[] = [];
 
   for (let i = 1; i <= count; i++) {
-    const sample: any = {};
+    const sample: Record<string, any> = {};
 
     entity.fields.forEach((field) => {
       sample[field.name] = generateFieldValue(field, i, entity.name);
@@ -35,7 +35,7 @@ function generateFieldValue(
   field: EntityField,
   index: number,
   entityName: string
-): any {
+): string | number | boolean | Date {
   const { type, name } = field;
 
   switch (type) {

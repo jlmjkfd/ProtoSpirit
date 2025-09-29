@@ -413,7 +413,7 @@ ${description}`,
   /**
    * Get Gemini-specific model information
    */
-  getModelInfo(): any {
+  getModelInfo(): { provider: string; model: string; version: string; capabilities: string[]; temperature: number; } {
     return {
       provider: "Google Gemini",
       model: this.config.model,
@@ -424,7 +424,6 @@ ${description}`,
         "structured_output",
         "large_context",
       ],
-      // maxTokens: this.config.maxTokens,
       temperature: this.config.temperature,
     };
   }

@@ -56,9 +56,9 @@ export class EntityProcessor {
   /**
    * Prepare raw AI extracted entities
    */
-  static prepareEntitiesFromAI(rawEntities: any[]): Entity[] {
+  static prepareEntitiesFromAI(rawEntities: Record<string, any>[]): Entity[] {
     return rawEntities.map(entity => ({
-      ...entity,
+      name: entity.name || '',
       fields: entity.fields || [],
       relationships: entity.relationships || [],
       examples: entity.examples || [],

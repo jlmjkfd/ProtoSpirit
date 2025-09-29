@@ -17,7 +17,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 // Health check endpoint
-app.get("/health", (req, res) => {
+app.get("/health", (req: express.Request, res: express.Response) => {
   res.json({
     status: "healthy",
     timestamp: new Date().toISOString(),
@@ -31,7 +31,7 @@ app.use("/api/requirements", requirementsRoutes);
 app.use("/api/projects", projectsRoutes);
 
 // 404 handler for unknown routes
-app.use((req, res) => {
+app.use((req: express.Request, res: express.Response) => {
   res.status(404).json({
     error: "Route not found",
     path: req.originalUrl,
