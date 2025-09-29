@@ -107,3 +107,4 @@ devdocs/
 /scripts/
 /shared/
 /temp/
+api-tests.http
