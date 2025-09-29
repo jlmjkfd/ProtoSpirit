@@ -176,10 +176,7 @@ export function ProjectDetailsTab({
       description: "New role description",
       features: [],
     };
-    setProjectData((prev) => ({
-      ...prev,
-      roles: [...prev.roles, newRole],
-    }));
+    // Just open the modal with the template role (don't save yet)
     setEditingRole(newRole);
   };
 
@@ -188,13 +185,30 @@ export function ProjectDetailsTab({
   };
 
   const handleUpdateRole = (updatedRole: Role) => {
-    setProjectData((prev) => ({
-      ...prev,
-      roles: prev.roles.map((r) =>
+    // Check if this is a new role (not in the current project)
+    const isNewRole = !projectData.roles.find(
+      (r) => r.name === editingRole?.name
+    );
+
+    let updatedRoles;
+    if (isNewRole) {
+      // Adding new role
+      updatedRoles = [...projectData.roles, updatedRole];
+    } else {
+      // Updating existing role
+      updatedRoles = projectData.roles.map((r) =>
         r.name === editingRole?.name ? updatedRole : r
-      ),
-    }));
+      );
+    }
+
+    const updatedProjectData = {
+      ...projectData,
+      roles: updatedRoles,
+    };
+
+    setProjectData(updatedProjectData);
     setEditingRole(null);
+    saveProjectChanges(updatedProjectData);
   };
 
   const handleDeleteRole = (roleName: string) => {
