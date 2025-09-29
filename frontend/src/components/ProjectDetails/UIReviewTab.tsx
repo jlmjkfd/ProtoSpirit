@@ -19,12 +19,17 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
   const [formData, setFormData] = useState<Record<string, any>>({});
 
   // Navigation history state
-  const [navigationHistory, setNavigationHistory] = useState<string[]>(["Dashboard"]);
+  const [navigationHistory, setNavigationHistory] = useState<string[]>([
+    "Dashboard",
+  ]);
 
   // Relationship management state
   const [showRelationshipView, setShowRelationshipView] = useState<any>(null); // null or feature object
-  const [showRelationshipForm, setShowRelationshipForm] = useState<boolean>(false);
-  const [relationshipFormData, setRelationshipFormData] = useState<Record<string, any>>({});
+  const [showRelationshipForm, setShowRelationshipForm] =
+    useState<boolean>(false);
+  const [relationshipFormData, setRelationshipFormData] = useState<
+    Record<string, any>
+  >({});
 
   // Helper function to get feature name from Feature object or string
   const getFeatureName = (feature: any): string => {
@@ -33,12 +38,12 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
 
   // Navigation history helpers
   const navigateToView = (viewName: string) => {
-    setNavigationHistory(prev => [...prev, viewName]);
+    setNavigationHistory((prev) => [...prev, viewName]);
     setCurrentView(viewName);
   };
 
   const navigateBack = () => {
-    setNavigationHistory(prev => {
+    setNavigationHistory((prev) => {
       if (prev.length <= 1) {
         return prev; // Stay on current view if no history
       }
@@ -125,10 +130,16 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
 
     // Add relationship features to menu if user can't access the entity list where they'd normally appear
     roleFeatures.forEach((feature) => {
-      if (typeof feature !== "string" && feature.category === "relationship" && feature.showInEntityLists) {
-        const hasAccessToAnyEntityList = feature.showInEntityLists.some((entityName) => {
-          return views.includes(`${entityName} List`);
-        });
+      if (
+        typeof feature !== "string" &&
+        feature.category === "relationship" &&
+        feature.showInEntityLists
+      ) {
+        const hasAccessToAnyEntityList = feature.showInEntityLists.some(
+          (entityName) => {
+            return views.includes(`${entityName} List`);
+          }
+        );
         if (!hasAccessToAnyEntityList) {
           views.push(feature.name);
         }
@@ -207,13 +218,17 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
     if (!entity) return;
 
     // Basic validation
-    const requiredFields = entity.fields?.filter((field) => field.required) || [];
+    const requiredFields =
+      entity.fields?.filter((field) => field.required) || [];
     const missingFields = requiredFields.filter(
-      (field) => !formData[field.name] || formData[field.name].toString().trim() === ""
+      (field) =>
+        !formData[field.name] || formData[field.name].toString().trim() === ""
     );
 
     if (missingFields.length > 0) {
-      alert(`Please fill in the required fields: ${missingFields.map((f) => f.name).join(", ")}`);
+      alert(
+        `Please fill in the required fields: ${missingFields.map((f) => f.name).join(", ")}`
+      );
       return;
     }
 
@@ -331,15 +346,15 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
     // Fallback for unknown views (simplified for intern task)
     return (
       <div className="p-6">
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        <div className="py-12 text-center">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900">
             {currentView}
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6 text-gray-600">
             This feature is not yet implemented in this demo.
           </p>
-          <div className="bg-gray-100 rounded-lg p-8">
-            <p className="text-gray-500 text-sm">
+          <div className="rounded-lg bg-gray-100 p-8">
+            <p className="text-sm text-gray-500">
               This would show the {currentView} interface for the {selectedRole}{" "}
               role.
             </p>
@@ -350,14 +365,14 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
   };
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Demo Header */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold">{project.appName}</h1>
-              <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+              <span className="rounded-full bg-white/20 px-3 py-1 text-sm">
                 Demo Mode
               </span>
             </div>
@@ -378,10 +393,14 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
                   setShowRelationshipForm(false);
                   setRelationshipFormData({});
                 }}
-                className="bg-white/20 border border-white/30 rounded-md px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="rounded-md border border-white/30 bg-white/20 px-3 py-2 text-sm text-white focus:ring-2 focus:ring-white/50 focus:outline-none"
               >
                 {project.roles.map((role) => (
-                  <option key={role.name} value={role.name} className="text-gray-900">
+                  <option
+                    key={role.name}
+                    value={role.name}
+                    className="text-gray-900"
+                  >
                     {role.name}
                   </option>
                 ))}
@@ -401,10 +420,10 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
                   setShowRelationshipForm(false);
                   setRelationshipFormData({});
                 }}
-                className={`px-3 py-2 rounded-md text-sm transition-colors ${
+                className={`rounded-md px-3 py-2 text-sm transition-colors ${
                   currentView === view
                     ? "bg-white/20 text-white"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                    : "text-white/80 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {view}
@@ -415,9 +434,7 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
       </div>
 
       {/* Main Content */}
-      <div className="min-h-[600px]">
-        {renderCurrentView()}
-      </div>
+      <div className="min-h-[600px]">{renderCurrentView()}</div>
     </div>
   );
 }

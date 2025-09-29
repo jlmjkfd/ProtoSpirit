@@ -1,12 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './hooks/useAuth';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import { Home } from './pages/Home';
-import { Login } from './pages/Login';
-import { CreateApp } from './pages/CreateApp';
-import { Projects } from './pages/Projects';
-import { ProjectDetails } from './pages/ProjectDetails';
-import { Admin } from './pages/Admin';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "./hooks/useAuth";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { CreateApp } from "./pages/CreateApp";
+import { Projects } from "./pages/Projects";
+import { ProjectDetails } from "./pages/ProjectDetails";
+import { Admin } from "./pages/Admin";
 
 function App() {
   return (
@@ -45,7 +50,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
 
             <Route
               path="/admin"

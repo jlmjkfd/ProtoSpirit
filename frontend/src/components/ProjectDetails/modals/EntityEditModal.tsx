@@ -226,23 +226,23 @@ export function EntityEditModal({
   );
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-5xl w-full max-h-[95vh] overflow-hidden">
+    <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black p-4">
+      <div className="max-h-[95vh] w-full max-w-5xl overflow-hidden rounded-lg bg-white shadow-xl">
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div>
                 <h2 className="text-lg font-semibold">Edit Entity</h2>
-                <p className="text-blue-100 text-sm">{editingEntity.name}</p>
+                <p className="text-sm text-blue-100">{editingEntity.name}</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="text-white hover:bg-white/20 rounded-md p-1 transition-colors"
+              className="rounded-md p-1 text-white transition-colors hover:bg-white/20"
             >
               <svg
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -259,17 +259,17 @@ export function EntityEditModal({
         </div>
 
         {/* Modal Body */}
-        <div className="p-4 overflow-y-auto max-h-[calc(95vh-7rem)]">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="max-h-[calc(95vh-7rem)] overflow-y-auto p-4">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {/* Left Side - Basic Information */}
             <div className="lg:col-span-1">
-              <div className="bg-gray-50 rounded-lg p-4 h-full flex flex-col">
-                <h3 className="text-md font-medium text-gray-900 mb-4">
+              <div className="flex h-full flex-col rounded-lg bg-gray-50 p-4">
+                <h3 className="text-md mb-4 font-medium text-gray-900">
                   Basic Information
                 </h3>
-                <div className="flex flex-col space-y-3 flex-1">
+                <div className="flex flex-1 flex-col space-y-3">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                    <label className="mb-1 block text-xs font-medium text-gray-700">
                       Entity Name
                     </label>
                     <input
@@ -281,11 +281,11 @@ export function EntityEditModal({
                           name: e.target.value,
                         }))
                       }
-                      className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm focus:ring-1 focus:ring-blue-500 focus:outline-none"
                     />
                   </div>
-                  <div className="flex-1 flex flex-col">
-                    <label className="block text-xs font-medium text-gray-700 mb-1">
+                  <div className="flex flex-1 flex-col">
+                    <label className="mb-1 block text-xs font-medium text-gray-700">
                       Description
                     </label>
                     <textarea
@@ -300,7 +300,7 @@ export function EntityEditModal({
                         }))
                       }
                       placeholder="Entity description..."
-                      className="flex-1 min-h-24 w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+                      className="min-h-24 w-full flex-1 resize-none rounded border border-gray-300 px-2 py-1.5 text-sm focus:ring-1 focus:ring-blue-500 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -310,17 +310,17 @@ export function EntityEditModal({
             {/* Right Side - Tabs Content */}
             <div className="lg:col-span-2">
               {/* Tabs */}
-              <div className="border-b border-gray-200 mb-4">
+              <div className="mb-4 border-b border-gray-200">
                 <nav className="flex space-x-6">
                   {(["fields", "relationships", "examples"] as const).map(
                     (tab) => (
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`py-1.5 px-1 border-b-2 font-medium text-xs capitalize ${
+                        className={`border-b-2 px-1 py-1.5 text-xs font-medium capitalize ${
                           activeTab === tab
                             ? "border-blue-500 text-blue-600"
-                            : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                            : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                         }`}
                       >
                         {tab}
@@ -374,16 +374,16 @@ export function EntityEditModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-gray-50 px-4 py-3 flex justify-end space-x-2 border-t border-gray-200">
+        <div className="flex justify-end space-x-2 border-t border-gray-200 bg-gray-50 px-4 py-3">
           <button
             onClick={onClose}
-            className="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 transition-colors"
+            className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 transition-colors hover:bg-gray-50"
           >
             Cancel
           </button>
           <button
             onClick={handleSave}
-            className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+            className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white transition-colors hover:bg-blue-700"
           >
             Save Changes
           </button>

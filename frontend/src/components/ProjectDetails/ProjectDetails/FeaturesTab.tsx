@@ -34,7 +34,6 @@ export function FeaturesTab({
     relationship: features.filter((f) => f.category === "relationship"),
   };
 
-
   const getCategoryColor = (category: "entity" | "relationship") => {
     switch (category) {
       case "entity":
@@ -51,36 +50,37 @@ export function FeaturesTab({
 
   const renderFeatureCard = (feature: Feature, index: number) => {
     // Get roles with their permission levels for this feature
-    const rolePermissions = feature.permissions?.map(permission => ({
-      roleName: permission.role,
-      actions: permission.actions
-    })) || [];
+    const rolePermissions =
+      feature.permissions?.map((permission) => ({
+        roleName: permission.role,
+        actions: permission.actions,
+      })) || [];
 
     return (
       <div
         key={feature.id || index}
-        className={`border rounded-lg p-4 hover:shadow-md transition-all ${getCategoryColor(
+        className={`rounded-lg border p-4 transition-all hover:shadow-md ${getCategoryColor(
           feature.category
         )}`}
       >
-        <div className="flex items-start justify-between mb-3">
+        <div className="mb-3 flex items-start justify-between">
           <div className="flex items-center space-x-2">
             <div>
-              <h4 className="font-semibold text-sm">{feature.name}</h4>
-              <p className="text-xs opacity-75 mt-1">{feature.description}</p>
+              <h4 className="text-sm font-semibold">{feature.name}</h4>
+              <p className="mt-1 text-xs opacity-75">{feature.description}</p>
             </div>
           </div>
           <div className="flex space-x-1">
             <button
               onClick={() => onEditFeature(feature)}
-              className="text-blue-600 hover:text-blue-800 text-sm p-1 rounded"
+              className="rounded p-1 text-sm text-blue-600 hover:text-blue-800"
               title="Edit feature"
             >
               ✏️
             </button>
             <button
               onClick={() => onDeleteFeature(feature.name)}
-              className="text-red-600 hover:text-red-800 text-sm p-1 rounded"
+              className="rounded p-1 text-sm text-red-600 hover:text-red-800"
               title="Delete feature"
             >
               🗑️
@@ -89,8 +89,8 @@ export function FeaturesTab({
         </div>
 
         <div className="mb-3">
-          <div className="text-xs font-medium mb-1">Category:</div>
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-white bg-opacity-70">
+          <div className="mb-1 text-xs font-medium">Category:</div>
+          <span className="bg-opacity-70 inline-flex items-center rounded-full bg-white px-2 py-1 text-xs font-medium">
             {feature.category.charAt(0).toUpperCase() +
               feature.category.slice(1)}
           </span>
@@ -98,33 +98,33 @@ export function FeaturesTab({
 
         {(feature.entityTarget || feature.relationshipTarget) && (
           <div className="mb-3">
-            <div className="text-xs font-medium mb-1">Target:</div>
-            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-white bg-opacity-70">
+            <div className="mb-1 text-xs font-medium">Target:</div>
+            <span className="bg-opacity-70 inline-flex items-center rounded-full bg-white px-2 py-1 text-xs">
               {feature.entityTarget || feature.relationshipTarget}
             </span>
           </div>
         )}
 
         <div>
-          <div className="text-xs font-medium mb-1">Role Permissions:</div>
+          <div className="mb-1 text-xs font-medium">Role Permissions:</div>
           <div className="flex flex-wrap gap-1">
             {rolePermissions.map((permission) => (
               <span
                 key={permission.roleName}
-                className={`inline-flex items-center px-2 py-0.5 rounded text-xs ${
-                  permission.actions.includes('full')
-                    ? 'bg-green-100 text-green-800 border border-green-200'
-                    : 'bg-blue-100 text-blue-800 border border-blue-200'
+                className={`inline-flex items-center rounded px-2 py-0.5 text-xs ${
+                  permission.actions.includes("full")
+                    ? "border border-green-200 bg-green-100 text-green-800"
+                    : "border border-blue-200 bg-blue-100 text-blue-800"
                 }`}
               >
                 {permission.roleName}
                 <span className="ml-1 text-xs opacity-75">
-                  ({permission.actions.includes('full') ? 'Full' : 'Read'})
+                  ({permission.actions.includes("full") ? "Full" : "Read"})
                 </span>
               </span>
             ))}
             {rolePermissions.length === 0 && (
-              <span className="text-xs opacity-60 italic">
+              <span className="text-xs italic opacity-60">
                 No roles assigned
               </span>
             )}
@@ -136,18 +136,18 @@ export function FeaturesTab({
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">System Features</h3>
         <div className="flex space-x-2">
           <button
             onClick={() => setShowAssignmentMatrix(true)}
-            className="px-3 py-2 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700 transition-colors"
+            className="rounded-md bg-indigo-600 px-3 py-2 text-sm text-white transition-colors hover:bg-indigo-700"
           >
-Assignment Matrix
+            Assignment Matrix
           </button>
           <button
             onClick={onAddFeature}
-            className="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors"
+            className="rounded-md bg-green-600 px-3 py-2 text-sm text-white transition-colors hover:bg-green-700"
           >
             + Add Feature
           </button>
@@ -155,7 +155,7 @@ Assignment Matrix
       </div>
 
       {/* Category Filter Tabs */}
-      <div className="flex space-x-1 mb-6 bg-gray-100 p-1 rounded-lg">
+      <div className="mb-6 flex space-x-1 rounded-lg bg-gray-100 p-1">
         {[
           { key: "all", label: "All Features" },
           { key: "entity", label: "Entity Management" },
@@ -164,7 +164,7 @@ Assignment Matrix
           <button
             key={key}
             onClick={() => setActiveCategory(key as any)}
-            className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex items-center space-x-2 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
               activeCategory === key
                 ? "bg-white text-gray-900 shadow-sm"
                 : "text-gray-600 hover:text-gray-900"
@@ -172,7 +172,7 @@ Assignment Matrix
           >
             <span>{label}</span>
             {key !== "all" && (
-              <span className="ml-1 bg-gray-200 text-gray-700 px-1.5 py-0.5 rounded-full text-xs">
+              <span className="ml-1 rounded-full bg-gray-200 px-1.5 py-0.5 text-xs text-gray-700">
                 {categorizedFeatures[key as keyof typeof categorizedFeatures]
                   ?.length || 0}
               </span>
@@ -183,24 +183,24 @@ Assignment Matrix
 
       {/* Features Grid */}
       {displayFeatures.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {displayFeatures.map(renderFeatureCard)}
         </div>
       ) : (
-        <div className="text-center py-12">
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+        <div className="py-12 text-center">
+          <h3 className="mb-2 text-lg font-medium text-gray-900">
             {activeCategory === "all"
               ? "No features yet"
               : `No ${activeCategory} features`}
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="mb-4 text-gray-600">
             {activeCategory === "all"
               ? "Add system features to define functionality."
               : `Add ${activeCategory} features to enhance your application.`}
           </p>
           <button
             onClick={onAddFeature}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
           >
             Add Feature
           </button>

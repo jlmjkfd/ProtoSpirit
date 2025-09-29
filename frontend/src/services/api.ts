@@ -92,9 +92,8 @@ class ApiService {
 
   // Projects endpoints
   async getProjects(): Promise<ApiResponse<Project[]>> {
-    const response: AxiosResponse<ApiResponse<Project[]>> = await this.api.get(
-      "/projects"
-    );
+    const response: AxiosResponse<ApiResponse<Project[]>> =
+      await this.api.get("/projects");
     return response.data;
   }
 
@@ -142,7 +141,6 @@ class ApiService {
     );
     return response.data;
   }
-
 
   // Health check
   async healthCheck(): Promise<any> {

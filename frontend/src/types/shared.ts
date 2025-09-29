@@ -6,7 +6,14 @@
 // Core Entity Types
 export interface EntityField {
   name: string;
-  type: 'text' | 'email' | 'number' | 'date' | 'boolean' | 'select' | 'textarea';
+  type:
+    | "text"
+    | "email"
+    | "number"
+    | "date"
+    | "boolean"
+    | "select"
+    | "textarea";
   required: boolean;
   validation?: {
     min?: number;
@@ -22,7 +29,7 @@ export interface EntityField {
 }
 
 export interface EntityRelationship {
-  type: 'one-to-one' | 'one-to-many' | 'many-to-one' | 'many-to-many';
+  type: "one-to-one" | "one-to-many" | "many-to-one" | "many-to-many";
   entity: string;
   description?: string;
   foreignKey?: string;
@@ -46,15 +53,15 @@ export interface Feature {
   id: string;
   name: string;
   description: string;
-  category: 'entity' | 'relationship';
+  category: "entity" | "relationship";
   entityTarget?: string;
   relationshipTarget?: string;
   // New relationship properties
-  relatedEntities?: string[];        // Which entities are involved in this relationship
-  showInEntityLists?: string[];      // Which entity lists should show this relationship button
+  relatedEntities?: string[]; // Which entities are involved in this relationship
+  showInEntityLists?: string[]; // Which entity lists should show this relationship button
   permissions: Array<{
     role: string;
-    actions: ('read' | 'full')[];
+    actions: ("read" | "full")[];
   }>;
 }
 

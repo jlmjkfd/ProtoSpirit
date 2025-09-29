@@ -7,7 +7,6 @@ import { ProjectSummary } from "../components/CreateApp/ProjectSummary";
 import apiService from "../services/api";
 import type { ExtractedRequirements, Project } from "../types";
 
-
 type CreateStep = "input" | "review" | "complete";
 
 export function CreateApp() {
@@ -95,10 +94,10 @@ export function CreateApp() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         {/* User Description Display */}
         {description && currentStep !== "input" && (
-          <div className="mb-6 bg-blue-50 border border-blue-200 rounded-md p-4">
+          <div className="mb-6 rounded-md border border-blue-200 bg-blue-50 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
                 <svg
@@ -117,7 +116,7 @@ export function CreateApp() {
                 <h3 className="text-sm font-medium text-blue-800">
                   Your App Description
                 </h3>
-                <p className="text-sm text-blue-700 mt-1">{description}</p>
+                <p className="mt-1 text-sm text-blue-700">{description}</p>
               </div>
             </div>
           </div>
@@ -125,7 +124,7 @@ export function CreateApp() {
 
         {/* Error Display */}
         {error && (
-          <div className="mb-6 bg-red-50 border border-red-200 rounded-md p-4">
+          <div className="mb-6 rounded-md border border-red-200 bg-red-50 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
                 <svg
@@ -142,7 +141,7 @@ export function CreateApp() {
               </div>
               <div className="ml-3">
                 <h3 className="text-sm font-medium text-red-800">Error</h3>
-                <p className="text-sm text-red-700 mt-1">{error}</p>
+                <p className="mt-1 text-sm text-red-700">{error}</p>
               </div>
               <div className="ml-auto pl-3">
                 <button
@@ -168,7 +167,7 @@ export function CreateApp() {
         )}
 
         {/* Step Content */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
           {currentStep === "input" && (
             <DescriptionInput
               onSubmit={handleDescriptionSubmit}

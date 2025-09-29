@@ -1,12 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 interface DescriptionInputProps {
   onSubmit: (description: string) => void;
   isLoading: boolean;
 }
 
-export function DescriptionInput({ onSubmit, isLoading }: DescriptionInputProps) {
-  const [description, setDescription] = useState('');
+export function DescriptionInput({
+  onSubmit,
+  isLoading,
+}: DescriptionInputProps) {
+  const [description, setDescription] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const minLength = 10;
@@ -25,18 +28,18 @@ export function DescriptionInput({ onSubmit, isLoading }: DescriptionInputProps)
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = 'auto';
+      textarea.style.height = "auto";
       const scrollHeight = textarea.scrollHeight;
 
       if (scrollHeight < minHeight) {
         textarea.style.height = `${minHeight}px`;
-        textarea.style.overflowY = 'hidden';
+        textarea.style.overflowY = "hidden";
       } else if (scrollHeight > maxHeight) {
         textarea.style.height = `${maxHeight}px`;
-        textarea.style.overflowY = 'auto';
+        textarea.style.overflowY = "auto";
       } else {
         textarea.style.height = `${scrollHeight}px`;
-        textarea.style.overflowY = 'hidden';
+        textarea.style.overflowY = "hidden";
       }
     }
   }, [description]);
@@ -60,55 +63,71 @@ export function DescriptionInput({ onSubmit, isLoading }: DescriptionInputProps)
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="flex min-h-screen flex-col bg-white">
       {/* Header - Search Engine Style */}
-      <div className="flex-1 flex flex-col justify-center items-center px-4 py-8">
-        <div className="w-full max-w-2xl mx-auto text-center">
+      <div className="flex flex-1 flex-col items-center justify-center px-4 py-8">
+        <div className="mx-auto w-full max-w-2xl text-center">
           {/* Title */}
-          <h1 className="text-4xl font-light text-gray-900 mb-2">
+          <h1 className="mb-2 text-4xl font-light text-gray-900">
             ProtoSpirit
           </h1>
-          <p className="text-lg text-gray-600 mb-12">
+          <p className="mb-12 text-lg text-gray-600">
             Describe your app idea and watch it come to life
           </p>
 
           {/* Main Search Interface */}
           <form onSubmit={handleSubmit} className="w-full">
-            <div className="relative bg-white border border-gray-300 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 focus-within:shadow-lg focus-within:border-blue-500">
+            <div className="relative rounded-lg border border-gray-300 bg-white shadow-sm transition-shadow duration-200 focus-within:border-blue-500 focus-within:shadow-lg hover:shadow-md">
               <textarea
                 ref={textareaRef}
                 value={description}
                 onChange={(e) => handleDescriptionChange(e.target.value)}
-                className="w-full px-6 py-4 text-lg text-gray-900 bg-transparent border-none rounded-lg resize-none focus:outline-none placeholder-gray-500"
+                className="w-full resize-none rounded-lg border-none bg-transparent px-6 py-4 text-lg text-gray-900 placeholder-gray-500 focus:outline-none"
                 placeholder="Describe your app idea in detail..."
                 disabled={isLoading}
                 style={{ minHeight: `${minHeight}px` }}
               />
 
               {/* Bottom row with character count and button */}
-              <div className="flex justify-between items-center px-6 pb-4">
+              <div className="flex items-center justify-between px-6 pb-4">
                 <div className="text-sm text-gray-500">
                   {description.length}/{maxLength}
                 </div>
                 <button
                   type="submit"
                   disabled={!isValid || isLoading}
-                  className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                  className={`rounded-md px-6 py-2 font-medium transition-colors ${
                     isValid && !isLoading
-                      ? 'bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      ? "bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                      : "cursor-not-allowed bg-gray-300 text-gray-500"
                   }`}
                 >
                   {isLoading ? (
                     <div className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="mr-2 -ml-1 h-4 w-4 animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Analyzing...
                     </div>
                   ) : (
-                    'Generate App'
+                    "Generate App"
                   )}
                 </button>
               </div>
@@ -119,22 +138,20 @@ export function DescriptionInput({ onSubmit, isLoading }: DescriptionInputProps)
 
       {/* Examples Section - Separated and Below */}
       <div className="bg-gray-50 py-12">
-        <div className="max-w-4xl mx-auto px-4">
-          <h3 className="text-center text-xl text-gray-700 mb-8">
+        <div className="mx-auto max-w-4xl px-4">
+          <h3 className="mb-8 text-center text-xl text-gray-700">
             Need inspiration? Try one of these examples:
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {exampleDescriptions.map((example, index) => (
               <button
                 key={index}
                 type="button"
                 onClick={() => handleExampleClick(example)}
                 disabled={isLoading}
-                className="text-left p-6 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all duration-200 text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="rounded-lg border border-gray-200 bg-white p-6 text-left text-gray-700 transition-all duration-200 hover:border-blue-300 hover:shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <div className="text-sm leading-relaxed">
-                  {example}
-                </div>
+                <div className="text-sm leading-relaxed">{example}</div>
               </button>
             ))}
           </div>

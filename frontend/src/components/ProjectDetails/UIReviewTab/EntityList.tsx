@@ -6,7 +6,10 @@ interface EntityListProps {
   selectedRole: string;
   roleFeatures: (string | Feature)[];
   getFeatureName: (feature: any) => string;
-  getFeaturePermission: (feature: any, roleName: string) => "full" | "read" | "none";
+  getFeaturePermission: (
+    feature: any,
+    roleName: string
+  ) => "full" | "read" | "none";
   generateSampleData: (entityName: string) => any[];
   showCreateForm: string | null;
   handleShowCreateForm: (entityName: string) => void;
@@ -27,7 +30,7 @@ export function EntityList({
   handleShowCreateForm,
   setShowRelationshipView,
   navigateToView,
-  renderCreateForm
+  renderCreateForm,
 }: EntityListProps) {
   const entity = project.entities.find((e) => e.name === entityName);
   if (!entity) return null;
@@ -37,12 +40,12 @@ export function EntityList({
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">
             {entityName} Management
           </h2>
-          <p className="text-gray-600 mt-1">
+          <p className="mt-1 text-gray-600">
             {entity.metadata?.description ||
               `Manage your ${entityName.toLowerCase()}s`}
           </p>
@@ -58,9 +61,7 @@ export function EntityList({
               getFeatureName(f)
                 .toLowerCase()
                 .includes("manage-" + entityName.toLowerCase()) ||
-              getFeatureName(f)
-                .toLowerCase()
-                .includes(entityName.toLowerCase())
+              getFeatureName(f).toLowerCase().includes(entityName.toLowerCase())
           );
           const permission = entityFeature
             ? getFeaturePermission(entityFeature, selectedRole)
@@ -69,7 +70,7 @@ export function EntityList({
         })() && (
           <button
             onClick={() => handleShowCreateForm(entityName)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
           >
             Add {entityName}
           </button>
@@ -81,26 +82,26 @@ export function EntityList({
         renderCreateForm()
       ) : (
         /* Data Table */
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 table-fixed">
+        <div className="overflow-hidden overflow-x-auto rounded-lg border border-gray-200 bg-white">
+          <table className="min-w-full table-fixed divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 {displayFields.map((field) => (
                   <th
                     key={field.name}
-                    className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${
+                    className={`px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase ${
                       field.type === "textarea" ? "w-80" : "w-40"
                     }`}
                   >
                     {field.name}
                   </th>
                 ))}
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-48">
+                <th className="w-48 px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 bg-white">
               {sampleData.map((item, index) => (
                 <tr key={index} className="hover:bg-gray-50">
                   {displayFields.map((field) => (
@@ -110,9 +111,9 @@ export function EntityList({
                         field.type === "textarea"
                           ? "max-w-xs break-words"
                           : field.type === "text" &&
-                            field.name.toLowerCase().includes("description")
-                          ? "max-w-xs break-words"
-                          : "whitespace-nowrap"
+                              field.name.toLowerCase().includes("description")
+                            ? "max-w-xs break-words"
+                            : "whitespace-nowrap"
                       }`}
                     >
                       <div
@@ -128,7 +129,7 @@ export function EntityList({
                       </div>
                     </td>
                   ))}
-                  <td className="px-6 py-4 text-sm text-gray-500 w-48">
+                  <td className="w-48 px-6 py-4 text-sm text-gray-500">
                     {(() => {
                       const entityFeature = roleFeatures.find(
                         (f) =>
@@ -158,62 +159,56 @@ export function EntityList({
                       return (
                         <div className="flex flex-wrap items-center gap-2">
                           {permission !== "none" && (
-                            <button className="text-blue-600 hover:text-blue-800 text-sm">
+                            <button className="text-sm text-blue-600 hover:text-blue-800">
                               View
                             </button>
                           )}
                           {permission === "full" && (
                             <>
-                              <button className="text-green-600 hover:text-green-800 text-sm">
+                              <button className="text-sm text-green-600 hover:text-green-800">
                                 Edit
                               </button>
-                              <button className="text-red-600 hover:text-red-800 text-sm">
+                              <button className="text-sm text-red-600 hover:text-red-800">
                                 Delete
                               </button>
                             </>
                           )}
 
                           {/* Add relationship action buttons - using new showInEntityLists property */}
-                          {relationshipFeatures.map(
-                            (relFeature, relIndex) => {
-                              const relPermission = getFeaturePermission(
-                                relFeature,
-                                selectedRole
-                              );
-                              if (relPermission === "none") return null;
+                          {relationshipFeatures.map((relFeature, relIndex) => {
+                            const relPermission = getFeaturePermission(
+                              relFeature,
+                              selectedRole
+                            );
+                            if (relPermission === "none") return null;
 
-                              // Use the new showInEntityLists property to determine if this button should appear
-                              const shouldShowInThisList =
-                                typeof relFeature !== "string" &&
-                                relFeature.showInEntityLists &&
-                                relFeature.showInEntityLists.includes(
-                                  entityName
-                                );
+                            // Use the new showInEntityLists property to determine if this button should appear
+                            const shouldShowInThisList =
+                              typeof relFeature !== "string" &&
+                              relFeature.showInEntityLists &&
+                              relFeature.showInEntityLists.includes(entityName);
 
-                              if (!shouldShowInThisList) return null;
+                            if (!shouldShowInThisList) return null;
 
-                              const actionName = getFeatureName(relFeature);
+                            const actionName = getFeatureName(relFeature);
 
-                              return (
-                                <button
-                                  key={relIndex}
-                                  onClick={() => {
-                                    setShowRelationshipView(relFeature);
-                                    navigateToView(
-                                      `${actionName} Management`
-                                    );
-                                  }}
-                                  className="text-purple-600 hover:text-purple-800 text-sm bg-purple-50 px-2 py-1 rounded"
-                                >
-                                  {actionName}
-                                </button>
-                              );
-                            }
-                          )}
+                            return (
+                              <button
+                                key={relIndex}
+                                onClick={() => {
+                                  setShowRelationshipView(relFeature);
+                                  navigateToView(`${actionName} Management`);
+                                }}
+                                className="rounded bg-purple-50 px-2 py-1 text-sm text-purple-600 hover:text-purple-800"
+                              >
+                                {actionName}
+                              </button>
+                            );
+                          })}
 
                           {permission === "none" &&
                             relationshipFeatures.length === 0 && (
-                              <span className="text-gray-400 text-xs">
+                              <span className="text-xs text-gray-400">
                                 No access
                               </span>
                             )}

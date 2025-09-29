@@ -10,13 +10,13 @@ export const Home = () => {
       <Header showNavigation={false} showLoginWhenNotAuth={true} />
 
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="mb-6 text-5xl font-bold text-gray-900">
             Transform Ideas into
             <span className="text-blue-600"> App Prototypes</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="mx-auto mb-8 max-w-3xl text-xl text-gray-600">
             Describe your app in plain English and watch ProtoSpirit generate
             beautiful, functional UI mockups with forms, tables, and navigation
             - powered by AI.
@@ -26,13 +26,13 @@ export const Home = () => {
             <div className="space-x-4">
               <Link
                 to="/create"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors"
+                className="rounded-lg bg-blue-600 px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-blue-700"
               >
                 Create Your App
               </Link>
               <Link
                 to="/projects"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-medium border border-blue-600 hover:bg-blue-50 transition-colors"
+                className="rounded-lg border border-blue-600 bg-white px-8 py-3 text-lg font-medium text-blue-600 transition-colors hover:bg-blue-50"
               >
                 View Projects
               </Link>
@@ -41,7 +41,7 @@ export const Home = () => {
             <div className="space-x-4">
               <Link
                 to="/login"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors"
+                className="rounded-lg bg-blue-600 px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-blue-700"
               >
                 Get Started
               </Link>
@@ -50,11 +50,11 @@ export const Home = () => {
         </div>
 
         {/* Features */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+        <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
               <svg
-                className="w-6 h-6 text-blue-600"
+                className="h-6 w-6 text-blue-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -67,7 +67,7 @@ export const Home = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900">
               AI-Powered Analysis
             </h3>
             <p className="text-gray-600">
@@ -76,10 +76,10 @@ export const Home = () => {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+          <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100">
               <svg
-                className="w-6 h-6 text-green-600"
+                className="h-6 w-6 text-green-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ export const Home = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900">
               Dynamic UI Generation
             </h3>
             <p className="text-gray-600">
@@ -101,10 +101,10 @@ export const Home = () => {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+          <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100">
               <svg
-                className="w-6 h-6 text-purple-600"
+                className="h-6 w-6 text-purple-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -117,7 +117,7 @@ export const Home = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900">
               Project Management
             </h3>
             <p className="text-gray-600">
@@ -128,25 +128,25 @@ export const Home = () => {
         </div>
 
         {/* Example */}
-        <div className="mt-20 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <div className="mt-20 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+          <div className="border-b border-gray-200 bg-gray-50 px-6 py-4">
             <h3 className="text-lg font-semibold text-gray-900">
               How it works
             </h3>
           </div>
           <div className="p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
               <div>
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <div className="w-8 h-8 aspect-square bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-4">
+                    <div className="mr-4 flex aspect-square h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-medium text-white">
                       1
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">
                         Describe your app
                       </h4>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-sm text-gray-600">
                         "I want an app to manage student courses and grades.
                         Teachers add courses, students enroll, and admins manage
                         reports."
@@ -154,14 +154,14 @@ export const Home = () => {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-8 h-8 aspect-square bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-4">
+                    <div className="mr-4 flex aspect-square h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-medium text-white">
                       2
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">
                         AI extracts requirements
                       </h4>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-sm text-gray-600">
                         Entities: Student, Course, Grade
                         <br />
                         Roles: Teacher, Student, Admin
@@ -171,14 +171,14 @@ export const Home = () => {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-8 h-8 aspect-square bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium mr-4">
+                    <div className="mr-4 flex aspect-square h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-medium text-white">
                       3
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900">
                         Generate UI mockup
                       </h4>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-sm text-gray-600">
                         Forms for each entity, role-based navigation, and
                         feature menus automatically created.
                       </p>
@@ -186,24 +186,24 @@ export const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-100 rounded-lg p-6">
+              <div className="rounded-lg bg-gray-100 p-6">
                 <div className="text-center text-gray-500">
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <div className="flex space-x-2 mb-4">
-                      <div className="px-3 py-1 bg-blue-100 text-blue-800 rounded text-sm">
+                  <div className="rounded-lg bg-white p-4 shadow-sm">
+                    <div className="mb-4 flex space-x-2">
+                      <div className="rounded bg-blue-100 px-3 py-1 text-sm text-blue-800">
                         Student
                       </div>
-                      <div className="px-3 py-1 bg-green-100 text-green-800 rounded text-sm">
+                      <div className="rounded bg-green-100 px-3 py-1 text-sm text-green-800">
                         Teacher
                       </div>
-                      <div className="px-3 py-1 bg-purple-100 text-purple-800 rounded text-sm">
+                      <div className="rounded bg-purple-100 px-3 py-1 text-sm text-purple-800">
                         Admin
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <div className="h-3 bg-gray-200 rounded"></div>
-                      <div className="h-3 bg-gray-200 rounded w-3/4"></div>
-                      <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                      <div className="h-3 rounded bg-gray-200"></div>
+                      <div className="h-3 w-3/4 rounded bg-gray-200"></div>
+                      <div className="h-3 w-1/2 rounded bg-gray-200"></div>
                     </div>
                     <div className="mt-4 text-xs text-gray-400">
                       Generated UI Preview
@@ -218,16 +218,16 @@ export const Home = () => {
         {/* CTA */}
         {!isAuthenticated && (
           <div className="mt-20 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="mb-4 text-3xl font-bold text-gray-900">
               Ready to bring your ideas to life?
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="mb-8 text-lg text-gray-600">
               Join ProtoSpirit today and start creating app prototypes in
               minutes.
             </p>
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors"
+              className="rounded-lg bg-blue-600 px-8 py-3 text-lg font-medium text-white transition-colors hover:bg-blue-700"
             >
               Sign In to Get Started
             </Link>
@@ -236,8 +236,8 @@ export const Home = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <footer className="mt-20 border-t border-gray-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="text-center text-gray-600">
             <p>
               &copy; 2024 ProtoSpirit. Built with React, Node.js, and Google

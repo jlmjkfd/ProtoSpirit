@@ -11,12 +11,12 @@ export function Dashboard({
   project,
   selectedRole,
   roleFeatures,
-  getFeatureName
+  getFeatureName,
 }: DashboardProps) {
   return (
     <div className="p-6">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">
           {selectedRole} Dashboard
         </h2>
         <p className="text-gray-600">
@@ -25,7 +25,7 @@ export function Dashboard({
       </div>
 
       {/* Simple Feature Cards (simplified for intern task) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {roleFeatures.map((feature, index) => {
           const isRelationship =
             typeof feature !== "string" && feature.category === "relationship";
@@ -35,22 +35,22 @@ export function Dashboard({
           return (
             <div
               key={index}
-              className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow"
+              className="rounded-lg border border-gray-200 bg-white p-6 transition-shadow hover:shadow-md"
             >
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-gray-900">
                   {getFeatureName(feature)}
                 </h3>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-sm text-gray-600">
                 {isRelationship
                   ? "Manage entity relationships"
                   : isEntity
-                  ? "Manage entity data"
-                  : "Access this feature"}
+                    ? "Manage entity data"
+                    : "Access this feature"}
               </p>
               {typeof feature !== "string" && feature.description && (
-                <p className="text-gray-500 text-xs mt-2">
+                <p className="mt-2 text-xs text-gray-500">
                   {feature.description}
                 </p>
               )}
@@ -60,13 +60,13 @@ export function Dashboard({
       </div>
 
       {/* Simple Entity Overview */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="rounded-lg border border-gray-200 bg-white p-6">
+        <h3 className="mb-4 text-lg font-semibold text-gray-900">
           Available Entities
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {project.entities.map((entity) => (
-            <div key={entity.name} className="p-3 bg-gray-50 rounded-lg">
+            <div key={entity.name} className="rounded-lg bg-gray-50 p-3">
               <h4 className="font-medium text-gray-900">{entity.name}</h4>
               <p className="text-sm text-gray-500">
                 {entity.fields?.length || 0} fields

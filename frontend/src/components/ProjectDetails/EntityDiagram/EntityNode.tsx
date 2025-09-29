@@ -33,21 +33,21 @@ export const EntityNodeComponent = memo(
     const relationshipCount = entity.relationships?.length || 0;
 
     return (
-      <div className="bg-white border-2 border-gray-300 rounded-lg shadow-lg min-w-[200px] hover:border-blue-400 transition-colors">
+      <div className="min-w-[200px] rounded-lg border-2 border-gray-300 bg-white shadow-lg transition-colors hover:border-blue-400">
         {/* Entity Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-t-lg">
+        <div className="rounded-t-lg bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <h3 className="font-semibold text-sm">{entity.name}</h3>
+              <h3 className="text-sm font-semibold">{entity.name}</h3>
             </div>
             <div className="flex items-center space-x-1">
               <button
                 onClick={handleEdit}
-                className="text-white hover:bg-white/20 rounded p-1 transition-colors"
+                className="rounded p-1 text-white transition-colors hover:bg-white/20"
                 title="Edit Entity"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="h-4 w-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -63,11 +63,11 @@ export const EntityNodeComponent = memo(
               {onDelete && (
                 <button
                   onClick={handleDelete}
-                  className="text-white hover:bg-red-500/50 rounded p-1 transition-colors"
+                  className="rounded p-1 text-white transition-colors hover:bg-red-500/50"
                   title="Delete Entity"
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ export const EntityNodeComponent = memo(
             </div>
           </div>
           {entity.metadata?.description && (
-            <p className="text-blue-100 text-xs mt-1 truncate">
+            <p className="mt-1 truncate text-xs text-blue-100">
               {entity.metadata.description}
             </p>
           )}
@@ -101,16 +101,16 @@ export const EntityNodeComponent = memo(
               >
                 <div className="flex items-center space-x-2">
                   <div
-                    className={`w-2 h-2 rounded-full ${
+                    className={`h-2 w-2 rounded-full ${
                       field.type === "text"
                         ? "bg-blue-400"
                         : field.type === "number"
-                        ? "bg-green-400"
-                        : field.type === "boolean"
-                        ? "bg-purple-400"
-                        : field.type === "date"
-                        ? "bg-orange-400"
-                        : "bg-gray-400"
+                          ? "bg-green-400"
+                          : field.type === "boolean"
+                            ? "bg-purple-400"
+                            : field.type === "date"
+                              ? "bg-orange-400"
+                              : "bg-gray-400"
                     }`}
                   />
                   <span className="font-medium text-gray-700">
@@ -119,9 +119,9 @@ export const EntityNodeComponent = memo(
                 </div>
                 <div className="flex items-center space-x-1">
                   {field.required && (
-                    <span className="text-red-500 text-xs">*</span>
+                    <span className="text-xs text-red-500">*</span>
                   )}
-                  <span className="text-gray-500 text-xs">{field.type}</span>
+                  <span className="text-xs text-gray-500">{field.type}</span>
                 </div>
               </div>
             ))}
@@ -140,7 +140,7 @@ export const EntityNodeComponent = memo(
           </div>
 
           {/* Entity Stats */}
-          <div className="mt-3 pt-2 border-t border-gray-200">
+          <div className="mt-3 border-t border-gray-200 pt-2">
             <div className="flex justify-between text-xs text-gray-600">
               <span>
                 {fieldCount} field{fieldCount !== 1 ? "s" : ""}
@@ -153,7 +153,7 @@ export const EntityNodeComponent = memo(
 
           {/* Click to edit hint */}
           <div className="mt-2 text-center">
-            <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded">
+            <span className="rounded bg-gray-50 px-2 py-1 text-xs text-gray-400">
               Click to edit
             </span>
           </div>
@@ -163,22 +163,22 @@ export const EntityNodeComponent = memo(
         <Handle
           type="target"
           position={Position.Top}
-          className="w-3 h-3 !bg-blue-500 border-2 border-white"
+          className="h-3 w-3 border-2 border-white !bg-blue-500"
         />
         <Handle
           type="source"
           position={Position.Bottom}
-          className="w-3 h-3 !bg-blue-500 border-2 border-white"
+          className="h-3 w-3 border-2 border-white !bg-blue-500"
         />
         <Handle
           type="target"
           position={Position.Left}
-          className="w-3 h-3 !bg-blue-500 border-2 border-white"
+          className="h-3 w-3 border-2 border-white !bg-blue-500"
         />
         <Handle
           type="source"
           position={Position.Right}
-          className="w-3 h-3 !bg-blue-500 border-2 border-white"
+          className="h-3 w-3 border-2 border-white !bg-blue-500"
         />
       </div>
     );

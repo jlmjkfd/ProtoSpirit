@@ -21,9 +21,9 @@ export const Header = ({
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <header className="border-b border-gray-200 bg-white shadow-sm">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
@@ -35,13 +35,13 @@ export const Header = ({
 
           {/* Navigation */}
           {showNavigation && isAuthenticated && (
-            <nav className="hidden md:flex space-x-6">
+            <nav className="hidden space-x-6 md:flex">
               <Link
                 to="/create"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-200 flex items-center space-x-2"
+                className="flex transform items-center space-x-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-blue-700 hover:to-purple-700 hover:shadow-lg"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="h-4 w-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -57,14 +57,14 @@ export const Header = ({
               </Link>
               <Link
                 to="/projects"
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600"
               >
                 Projects
               </Link>
               {user?.role === "admin" && (
                 <Link
                   to="/admin"
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600"
                 >
                   Admin
                 </Link>
@@ -78,9 +78,9 @@ export const Header = ({
               <>
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex items-center text-sm text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md p-2"
+                  className="flex items-center rounded-md p-2 text-sm text-gray-700 hover:text-gray-900 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
                 >
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium mr-2">
+                  <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 font-medium text-white">
                     {user?.displayName?.charAt(0)?.toUpperCase() ||
                       user?.username?.charAt(0)?.toUpperCase() ||
                       "U"}
@@ -103,8 +103,8 @@ export const Header = ({
 
                 {/* Dropdown menu */}
                 {isMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
-                    <div className="px-4 py-2 text-sm text-gray-500 border-b border-gray-100">
+                  <div className="absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-200 bg-white py-1 shadow-lg">
+                    <div className="border-b border-gray-100 px-4 py-2 text-sm text-gray-500">
                       <div className="font-medium">
                         {user?.displayName || user?.username}
                       </div>
@@ -116,7 +116,7 @@ export const Header = ({
                         setIsMenuOpen(false);
                         handleLogout();
                       }}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Sign out
                     </button>
@@ -127,7 +127,7 @@ export const Header = ({
               showLoginWhenNotAuth && (
                 <Link
                   to="/login"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
+                  className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
                 >
                   Sign In
                 </Link>
@@ -141,7 +141,7 @@ export const Header = ({
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md p-2"
+                className="rounded-md p-2 text-gray-700 hover:text-gray-900 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
               >
                 <svg
                   className="h-6 w-6"
@@ -164,18 +164,18 @@ export const Header = ({
         {/* Mobile navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3 border-t border-gray-200">
+            <div className="space-y-2 border-t border-gray-200 px-2 pt-2 pb-3 sm:px-3">
               {isAuthenticated ? (
                 <>
                   {showNavigation && (
                     <>
                       <Link
                         to="/create"
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 px-4 py-3 rounded-lg text-base font-semibold shadow-md flex items-center space-x-3"
+                        className="flex items-center space-x-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-3 text-base font-semibold text-white shadow-md hover:from-blue-700 hover:to-purple-700"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <svg
-                          className="w-5 h-5"
+                          className="h-5 w-5"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -191,7 +191,7 @@ export const Header = ({
                       </Link>
                       <Link
                         to="/projects"
-                        className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         Projects
@@ -199,7 +199,7 @@ export const Header = ({
                       {user?.role === "admin" && (
                         <Link
                           to="/admin"
-                          className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           Admin
@@ -219,7 +219,7 @@ export const Header = ({
                         setIsMenuOpen(false);
                         handleLogout();
                       }}
-                      className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+                      className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                     >
                       Sign out
                     </button>
@@ -229,7 +229,7 @@ export const Header = ({
                 showLoginWhenNotAuth && (
                   <Link
                     to="/login"
-                    className="bg-blue-600 text-white hover:bg-blue-700 block px-4 py-3 rounded-lg text-base font-semibold text-center"
+                    className="block rounded-lg bg-blue-600 px-4 py-3 text-center text-base font-semibold text-white hover:bg-blue-700"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Sign In

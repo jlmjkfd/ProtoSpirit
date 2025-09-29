@@ -3,7 +3,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  role: 'admin' | 'user';
+  role: "admin" | "user";
   displayName: string;
   profile?: {
     firstName?: string;
@@ -31,7 +31,7 @@ export interface AuthResponse {
 }
 
 // Re-export shared types
-export * from './shared';
+export * from "./shared";
 
 // App state types
 export interface AppState {

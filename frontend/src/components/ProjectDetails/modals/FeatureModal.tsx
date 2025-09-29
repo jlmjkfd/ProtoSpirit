@@ -58,16 +58,22 @@ export function FeatureModal({
   };
 
   const modalTitle = isNew ? "Add New Feature" : "Edit Feature";
-  const modalSubtitle = isNew ? "Create a new system feature" : `Modify ${feature.name} settings`;
+  const modalSubtitle = isNew
+    ? "Create a new system feature"
+    : `Modify ${feature.name} settings`;
   const saveButtonText = isNew ? "Add Feature" : "Save Changes";
-  const headerColorClass = isNew ? "from-purple-600 to-purple-700" : "from-blue-600 to-blue-700";
+  const headerColorClass = isNew
+    ? "from-purple-600 to-purple-700"
+    : "from-blue-600 to-blue-700";
   const accentColorClass = isNew ? "purple" : "blue";
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[95vh] overflow-hidden">
+    <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black p-4">
+      <div className="max-h-[95vh] w-full max-w-2xl overflow-hidden rounded-lg bg-white shadow-xl">
         {/* Modal Header */}
-        <div className={`bg-gradient-to-r ${headerColorClass} text-white px-4 py-3`}>
+        <div
+          className={`bg-gradient-to-r ${headerColorClass} px-4 py-3 text-white`}
+        >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <span className="text-lg">⚡</span>
@@ -80,10 +86,10 @@ export function FeatureModal({
             </div>
             <button
               onClick={onClose}
-              className="text-white hover:bg-white/20 rounded-md p-1 transition-colors"
+              className="rounded-md p-1 text-white transition-colors hover:bg-white/20"
             >
               <svg
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -100,16 +106,16 @@ export function FeatureModal({
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto max-h-[calc(95vh-7rem)]">
+        <div className="max-h-[calc(95vh-7rem)] overflow-y-auto p-6">
           <div className="space-y-6">
             {/* Basic Information */}
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="text-md font-medium text-gray-900 mb-4">
+            <div className="rounded-lg bg-gray-50 p-4">
+              <h3 className="text-md mb-4 font-medium text-gray-900">
                 Basic Information
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="md:col-span-2">
-                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                  <label className="mb-1 block text-xs font-medium text-gray-700">
                     Feature Name *
                   </label>
                   <input
@@ -119,12 +125,12 @@ export function FeatureModal({
                       setFormData((prev) => ({ ...prev, name: e.target.value }))
                     }
                     placeholder="Enter feature name..."
-                    className={`w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-${accentColorClass}-500`}
+                    className={`w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:outline-none focus:ring-${accentColorClass}-500`}
                     required
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                  <label className="mb-1 block text-xs font-medium text-gray-700">
                     Description
                   </label>
                   <textarea
@@ -136,11 +142,11 @@ export function FeatureModal({
                       }))
                     }
                     placeholder="Feature description..."
-                    className={`w-full h-20 px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-${accentColorClass}-500 resize-none`}
+                    className={`h-20 w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:outline-none focus:ring-${accentColorClass}-500 resize-none`}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                  <label className="mb-1 block text-xs font-medium text-gray-700">
                     Category *
                   </label>
                   <select
@@ -157,7 +163,7 @@ export function FeatureModal({
                         showInEntityLists: [],
                       }));
                     }}
-                    className={`w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-${accentColorClass}-500`}
+                    className={`w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:outline-none focus:ring-${accentColorClass}-500`}
                     required
                   >
                     <option value="entity">Entity Feature</option>
@@ -169,12 +175,12 @@ export function FeatureModal({
 
             {/* Entity-specific settings */}
             {formData.category === "entity" && (
-              <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="text-md font-medium text-gray-900 mb-4">
+              <div className="rounded-lg bg-blue-50 p-4">
+                <h3 className="text-md mb-4 font-medium text-gray-900">
                   Entity Settings
                 </h3>
                 <div>
-                  <label className="block text-xs font-medium text-gray-700 mb-1">
+                  <label className="mb-1 block text-xs font-medium text-gray-700">
                     Target Entity
                   </label>
                   <select
@@ -185,7 +191,7 @@ export function FeatureModal({
                         entityTarget: e.target.value,
                       }))
                     }
-                    className={`w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-${accentColorClass}-500`}
+                    className={`w-full rounded border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:outline-none focus:ring-${accentColorClass}-500`}
                   >
                     <option value="">Select target entity...</option>
                     {entities.map((entity) => (
@@ -194,7 +200,7 @@ export function FeatureModal({
                       </option>
                     ))}
                   </select>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="mt-1 text-xs text-gray-500">
                     Which entity this feature primarily manages
                   </p>
                 </div>
@@ -203,27 +209,30 @@ export function FeatureModal({
 
             {/* Relationship-specific settings */}
             {formData.category === "relationship" && (
-              <div className="bg-green-50 rounded-lg p-4">
-                <h3 className="text-md font-medium text-gray-900 mb-4">
+              <div className="rounded-lg bg-green-50 p-4">
+                <h3 className="text-md mb-4 font-medium text-gray-900">
                   Relationship Settings
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                    <label className="mb-2 block text-xs font-medium text-gray-700">
                       Related Entities *
                     </label>
-                    <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-300 rounded-md p-3 bg-white shadow-sm">
+                    <div className="max-h-32 space-y-2 overflow-y-auto rounded-md border border-gray-300 bg-white p-3 shadow-sm">
                       {entities.map((entity) => (
                         <label
                           key={entity.name}
-                          className="flex items-center space-x-2 py-1 border-b border-gray-100 last:border-b-0"
+                          className="flex items-center space-x-2 border-b border-gray-100 py-1 last:border-b-0"
                         >
                           <input
                             type="checkbox"
                             checked={formData.relatedEntities.includes(
                               entity.name
                             )}
-                            disabled={!formData.relatedEntities.includes(entity.name) && formData.relatedEntities.length >= 2}
+                            disabled={
+                              !formData.relatedEntities.includes(entity.name) &&
+                              formData.relatedEntities.length >= 2
+                            }
                             onChange={(e) => {
                               const checked = e.target.checked;
                               setFormData((prev) => {
@@ -231,21 +240,26 @@ export function FeatureModal({
                                 if (checked) {
                                   // Only allow selection if less than 2 entities are selected
                                   if (prev.relatedEntities.length < 2) {
-                                    newRelatedEntities = [...prev.relatedEntities, entity.name];
+                                    newRelatedEntities = [
+                                      ...prev.relatedEntities,
+                                      entity.name,
+                                    ];
                                   } else {
                                     // Prevent selection if already 2 entities selected
                                     return prev;
                                   }
                                 } else {
-                                  newRelatedEntities = prev.relatedEntities.filter(
-                                    (name) => name !== entity.name
-                                  );
+                                  newRelatedEntities =
+                                    prev.relatedEntities.filter(
+                                      (name) => name !== entity.name
+                                    );
                                 }
 
                                 // Update showInEntityLists to only include entities that are in relatedEntities
-                                const newShowInEntityLists = prev.showInEntityLists.filter(
-                                  (name) => newRelatedEntities.includes(name)
-                                );
+                                const newShowInEntityLists =
+                                  prev.showInEntityLists.filter((name) =>
+                                    newRelatedEntities.includes(name)
+                                  );
 
                                 return {
                                   ...prev,
@@ -254,7 +268,7 @@ export function FeatureModal({
                                 };
                               });
                             }}
-                            className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 border-gray-300 rounded`}
+                            className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 rounded border-gray-300`}
                           />
                           <span className="text-sm text-gray-700">
                             {entity.name}
@@ -262,53 +276,60 @@ export function FeatureModal({
                         </label>
                       ))}
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Select exactly 2 entities for this relationship ({formData.relatedEntities.length}/2 selected)
+                    <p className="mt-1 text-xs text-gray-500">
+                      Select exactly 2 entities for this relationship (
+                      {formData.relatedEntities.length}/2 selected)
                     </p>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                    <label className="mb-2 block text-xs font-medium text-gray-700">
                       Show in Entity Lists
                     </label>
-                    <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-300 rounded-md p-3 bg-white shadow-sm">
+                    <div className="max-h-32 space-y-2 overflow-y-auto rounded-md border border-gray-300 bg-white p-3 shadow-sm">
                       {formData.relatedEntities.length === 0 ? (
                         <p className="text-sm text-gray-400 italic">
-                          Select related entities first to choose which entity lists should show this relationship button
+                          Select related entities first to choose which entity
+                          lists should show this relationship button
                         </p>
                       ) : (
-                        entities.filter(entity => formData.relatedEntities.includes(entity.name)).map((entity) => (
-                          <label
-                            key={entity.name}
-                            className="flex items-center space-x-2 py-1 border-b border-gray-100 last:border-b-0"
-                          >
-                            <input
-                              type="checkbox"
-                              checked={formData.showInEntityLists.includes(
-                                entity.name
-                              )}
-                              onChange={(e) => {
-                                const checked = e.target.checked;
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  showInEntityLists: checked
-                                    ? [...prev.showInEntityLists, entity.name]
-                                    : prev.showInEntityLists.filter(
-                                        (name) => name !== entity.name
-                                      ),
-                                }));
-                              }}
-                              className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 border-gray-300 rounded`}
-                            />
-                            <span className="text-sm text-gray-700">
-                              {entity.name}
-                            </span>
-                          </label>
-                        ))
+                        entities
+                          .filter((entity) =>
+                            formData.relatedEntities.includes(entity.name)
+                          )
+                          .map((entity) => (
+                            <label
+                              key={entity.name}
+                              className="flex items-center space-x-2 border-b border-gray-100 py-1 last:border-b-0"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={formData.showInEntityLists.includes(
+                                  entity.name
+                                )}
+                                onChange={(e) => {
+                                  const checked = e.target.checked;
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    showInEntityLists: checked
+                                      ? [...prev.showInEntityLists, entity.name]
+                                      : prev.showInEntityLists.filter(
+                                          (name) => name !== entity.name
+                                        ),
+                                  }));
+                                }}
+                                className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 rounded border-gray-300`}
+                              />
+                              <span className="text-sm text-gray-700">
+                                {entity.name}
+                              </span>
+                            </label>
+                          ))
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Which entity lists should show this relationship button (only selected related entities available)
+                    <p className="mt-1 text-xs text-gray-500">
+                      Which entity lists should show this relationship button
+                      (only selected related entities available)
                     </p>
                   </div>
                 </div>
@@ -316,11 +337,11 @@ export function FeatureModal({
             )}
 
             {/* Permissions */}
-            <div className="bg-yellow-50 rounded-lg p-4">
-              <h3 className="text-md font-medium text-gray-900 mb-4">
+            <div className="rounded-lg bg-yellow-50 p-4">
+              <h3 className="text-md mb-4 font-medium text-gray-900">
                 Role Permissions
               </h3>
-              <div className="space-y-3 border border-gray-300 rounded-md p-3 bg-white shadow-sm max-h-40 overflow-y-auto">
+              <div className="max-h-40 space-y-3 overflow-y-auto rounded-md border border-gray-300 bg-white p-3 shadow-sm">
                 {roles.map((role) => {
                   const rolePermission = formData.permissions.find(
                     (p) => p.role === role.name
@@ -328,10 +349,10 @@ export function FeatureModal({
                   return (
                     <div
                       key={role.name}
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded border border-gray-200 last:mb-0"
+                      className="flex items-center justify-between rounded border border-gray-200 bg-gray-50 p-3 last:mb-0"
                     >
                       <div>
-                        <span className="font-medium text-sm">{role.name}</span>
+                        <span className="text-sm font-medium">{role.name}</span>
                         <p className="text-xs text-gray-500">
                           {role.description}
                         </p>
@@ -367,7 +388,7 @@ export function FeatureModal({
                                 return { ...prev, permissions };
                               });
                             }}
-                            className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 border-gray-300 rounded`}
+                            className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 rounded border-gray-300`}
                           />
                           <span className="text-xs">Read</span>
                         </label>
@@ -399,7 +420,7 @@ export function FeatureModal({
                                 return { ...prev, permissions };
                               });
                             }}
-                            className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 border-gray-300 rounded`}
+                            className={`h-4 w-4 text-${accentColorClass}-600 focus:ring-${accentColorClass}-500 rounded border-gray-300`}
                           />
                           <span className="text-xs">Full</span>
                         </label>
@@ -408,7 +429,7 @@ export function FeatureModal({
                   );
                 })}
               </div>
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="mt-2 text-xs text-gray-500">
                 Set which roles can access this feature and their permission
                 levels
               </p>
@@ -417,10 +438,10 @@ export function FeatureModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-gray-50 px-4 py-3 flex justify-end space-x-2 border-t border-gray-200">
+        <div className="flex justify-end space-x-2 border-t border-gray-200 bg-gray-50 px-4 py-3">
           <button
             onClick={onClose}
-            className="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 transition-colors"
+            className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 transition-colors hover:bg-gray-50"
           >
             Cancel
           </button>
@@ -431,7 +452,7 @@ export function FeatureModal({
               (formData.category === "relationship" &&
                 formData.relatedEntities.length !== 2)
             }
-            className={`px-3 py-1.5 text-sm bg-${accentColorClass}-600 text-white rounded hover:bg-${accentColorClass}-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+            className={`px-3 py-1.5 text-sm bg-${accentColorClass}-600 rounded text-white hover:bg-${accentColorClass}-700 transition-colors disabled:cursor-not-allowed disabled:opacity-50`}
           >
             {saveButtonText}
           </button>

@@ -1,4 +1,4 @@
-import type { Entity } from '../../../types';
+import type { Entity } from "../../../types";
 
 interface EntitiesTabProps {
   entities: Entity[];
@@ -15,35 +15,35 @@ export function EntitiesTab({
   onHighlight,
   onAddEntity,
   onEditEntity,
-  onDeleteEntity
+  onDeleteEntity,
 }: EntitiesTabProps) {
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">Data Entities</h3>
         <button
           onClick={onAddEntity}
-          className="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors"
+          className="rounded-md bg-green-600 px-3 py-2 text-sm text-white transition-colors hover:bg-green-700"
         >
           + Add Entity
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {entities.map((entity, index) => (
           <div
             key={index}
-            className={`border rounded-lg p-4 cursor-pointer transition-all ${
+            className={`cursor-pointer rounded-lg border p-4 transition-all ${
               highlightedEntity === entity.name
-                ? 'bg-blue-50 border-blue-300 shadow-md'
-                : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
+                ? "border-blue-300 bg-blue-50 shadow-md"
+                : "border-gray-200 bg-gray-50 hover:bg-gray-100"
             }`}
             onClick={() => onHighlight(entity.name)}
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="mb-2 flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <h4 className="font-medium text-gray-900">{entity.name}</h4>
-                <span className="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">
+                <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800">
                   Entity
                 </span>
               </div>
@@ -53,7 +53,7 @@ export function EntitiesTab({
                     e.stopPropagation();
                     onEditEntity(entity);
                   }}
-                  className="text-blue-500 hover:text-blue-700 p-1"
+                  className="p-1 text-blue-500 hover:text-blue-700"
                   title="Edit entity"
                 >
                   ✏️
@@ -63,7 +63,7 @@ export function EntitiesTab({
                     e.stopPropagation();
                     onDeleteEntity(entity.name);
                   }}
-                  className="text-red-500 hover:text-red-700 p-1"
+                  className="p-1 text-red-500 hover:text-red-700"
                   title="Delete entity"
                 >
                   🗑️
@@ -71,8 +71,8 @@ export function EntitiesTab({
               </div>
             </div>
 
-            <p className="text-sm text-gray-600 mb-3">
-              {entity.metadata?.description || 'No description'}
+            <p className="mb-3 text-sm text-gray-600">
+              {entity.metadata?.description || "No description"}
             </p>
 
             <div className="space-y-2">
@@ -100,13 +100,17 @@ export function EntitiesTab({
       </div>
 
       {entities.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-gray-400 mb-4">📄</div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No entities yet</h3>
-          <p className="text-gray-600 mb-4">Add your first data entity to get started.</p>
+        <div className="py-12 text-center">
+          <div className="mb-4 text-gray-400">📄</div>
+          <h3 className="mb-2 text-lg font-medium text-gray-900">
+            No entities yet
+          </h3>
+          <p className="mb-4 text-gray-600">
+            Add your first data entity to get started.
+          </p>
           <button
             onClick={onAddEntity}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
           >
             Add Entity
           </button>

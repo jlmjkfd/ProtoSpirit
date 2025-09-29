@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 export function EmptyProjects() {
   return (
-    <div className="text-center py-12">
-      <div className="max-w-md mx-auto">
+    <div className="py-12 text-center">
+      <div className="mx-auto max-w-md">
         {/* Illustration */}
-        <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 mb-6">
+        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-blue-100">
           <svg
             className="h-12 w-12 text-blue-600"
             fill="none"
@@ -22,10 +22,10 @@ export function EmptyProjects() {
         </div>
 
         {/* Content */}
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="mb-2 text-xl font-semibold text-gray-900">
           No projects yet
         </h3>
-        <p className="text-gray-600 mb-8">
+        <p className="mb-8 text-gray-600">
           Get started by creating your first app prototype. Describe your idea
           in natural language and let our AI generate the structure for you.
         </p>
@@ -33,10 +33,10 @@ export function EmptyProjects() {
         {/* CTA Button */}
         <Link
           to="/create"
-          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          className="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700"
         >
           <svg
-            className="w-5 h-5 mr-2"
+            className="mr-2 h-5 w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

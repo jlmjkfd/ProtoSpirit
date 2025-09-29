@@ -29,14 +29,14 @@ export function FieldsTab({
 }: FieldsTabProps) {
   return (
     <div>
-      <h4 className="text-sm font-medium text-gray-900 mb-3">Entity Fields</h4>
+      <h4 className="mb-3 text-sm font-medium text-gray-900">Entity Fields</h4>
 
       {/* Add New Field */}
-      <div className="bg-gray-50 rounded p-3 mb-3">
-        <h5 className="text-xs font-medium text-gray-700 mb-2">
+      <div className="mb-3 rounded bg-gray-50 p-3">
+        <h5 className="mb-2 text-xs font-medium text-gray-700">
           Add New Field
         </h5>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-2 items-end">
+        <div className="grid grid-cols-1 items-end gap-2 md:grid-cols-5">
           <div>
             <input
               type="text"
@@ -46,7 +46,7 @@ export function FieldsTab({
                 onNewFieldChange({ ...newField, name: e.target.value });
                 if (fieldNameError) onFieldNameError(false);
               }}
-              className={`w-full px-2 py-1.5 text-sm border rounded focus:outline-none focus:ring-1 ${
+              className={`w-full rounded border px-2 py-1.5 text-sm focus:ring-1 focus:outline-none ${
                 fieldNameError
                   ? "border-red-500 focus:ring-red-500"
                   : "border-gray-300 focus:ring-blue-500"
@@ -59,7 +59,7 @@ export function FieldsTab({
               onChange={(e) =>
                 onNewFieldChange({ ...newField, type: e.target.value as any })
               }
-              className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm focus:ring-1 focus:ring-blue-500 focus:outline-none"
             >
               <option value="text">Text</option>
               <option value="email">Email</option>
@@ -86,7 +86,7 @@ export function FieldsTab({
           <div className="md:col-span-2">
             <button
               onClick={onAddField}
-              className="w-full px-2 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              className="w-full rounded bg-blue-600 px-2 py-1.5 text-xs text-white transition-colors hover:bg-blue-700"
             >
               Add Field
             </button>
@@ -103,15 +103,15 @@ export function FieldsTab({
           return (
             <div
               key={index}
-              className={`border rounded p-2 ${
+              className={`rounded border p-2 ${
                 isRemoved
-                  ? "bg-red-50 border-red-200"
+                  ? "border-red-200 bg-red-50"
                   : isNew
-                  ? "bg-green-50 border-green-200"
-                  : "bg-white border-gray-200"
+                    ? "border-green-200 bg-green-50"
+                    : "border-gray-200 bg-white"
               }`}
             >
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-2 items-center">
+              <div className="grid grid-cols-1 items-center gap-2 md:grid-cols-5">
                 <div>
                   <input
                     type="text"
@@ -120,7 +120,7 @@ export function FieldsTab({
                       onUpdateField(index, { ...field, name: e.target.value })
                     }
                     disabled={isRemoved}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:outline-none focus:ring-1 ${
+                    className={`w-full rounded border px-2 py-1.5 text-sm focus:ring-1 focus:outline-none ${
                       isRemoved
                         ? "bg-gray-100 text-gray-500"
                         : "border-gray-300 focus:ring-blue-500"
@@ -137,7 +137,7 @@ export function FieldsTab({
                       })
                     }
                     disabled={isRemoved}
-                    className={`w-full px-2 py-1.5 text-sm border rounded focus:outline-none focus:ring-1 ${
+                    className={`w-full rounded border px-2 py-1.5 text-sm focus:ring-1 focus:outline-none ${
                       isRemoved
                         ? "bg-gray-100 text-gray-500"
                         : "border-gray-300 focus:ring-blue-500"
@@ -175,18 +175,18 @@ export function FieldsTab({
                     </span>
                   </label>
                 </div>
-                <div className="md:col-span-2 flex justify-center">
+                <div className="flex justify-center md:col-span-2">
                   {isRemoved ? (
                     <button
                       onClick={() => onCancelRemoveField(index)}
-                      className="px-2 py-1.5 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200 transition-colors"
+                      className="rounded bg-green-100 px-2 py-1.5 text-xs text-green-700 transition-colors hover:bg-green-200"
                     >
                       Cancel Remove
                     </button>
                   ) : (
                     <button
                       onClick={() => onRemoveField(index)}
-                      className="px-2 py-1.5 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
+                      className="rounded bg-red-100 px-2 py-1.5 text-xs text-red-700 transition-colors hover:bg-red-200"
                     >
                       Remove
                     </button>
@@ -198,7 +198,7 @@ export function FieldsTab({
         })}
 
         {(!editingEntity.fields || editingEntity.fields.length === 0) && (
-          <div className="text-center py-6 text-gray-500 text-sm">
+          <div className="py-6 text-center text-sm text-gray-500">
             No fields defined. Add a field above to get started.
           </div>
         )}

@@ -25,11 +25,11 @@ export function RolesTab({
 }: RolesTabProps) {
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">User Roles</h3>
         <button
           onClick={onAddRole}
-          className="px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors"
+          className="rounded-md bg-green-600 px-3 py-2 text-sm text-white transition-colors hover:bg-green-700"
         >
           + Add Role
         </button>
@@ -39,16 +39,16 @@ export function RolesTab({
         {roles.map((role, index) => (
           <div
             key={index}
-            className={`border rounded-lg p-4 cursor-pointer transition-all ${
+            className={`cursor-pointer rounded-lg border p-4 transition-all ${
               highlightedRole === role.name
-                ? "bg-blue-50 border-blue-300 shadow-md"
-                : "bg-gray-50 border-gray-200 hover:bg-gray-100"
+                ? "border-blue-300 bg-blue-50 shadow-md"
+                : "border-gray-200 bg-gray-50 hover:bg-gray-100"
             }`}
             onClick={() => onHighlight(role.name)}
           >
-            <div className="flex items-center justify-between mb-3">
+            <div className="mb-3 flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">
                   {role.name}
                 </span>
                 <span className="text-sm text-gray-500">
@@ -61,7 +61,7 @@ export function RolesTab({
                     e.stopPropagation();
                     onEditRole(role);
                   }}
-                  className="text-blue-500 hover:text-blue-700 p-1"
+                  className="p-1 text-blue-500 hover:text-blue-700"
                   title="Edit role"
                 >
                   ✏️
@@ -71,7 +71,7 @@ export function RolesTab({
                     e.stopPropagation();
                     onDeleteRole(role.name);
                   }}
-                  className="text-red-500 hover:text-red-700 p-1"
+                  className="p-1 text-red-500 hover:text-red-700"
                   title="Delete role"
                 >
                   🗑️
@@ -79,17 +79,17 @@ export function RolesTab({
               </div>
             </div>
 
-            <p className="text-sm text-gray-600 mb-4">{role.description}</p>
+            <p className="mb-4 text-sm text-gray-600">{role.description}</p>
 
             <div className="space-y-2">
-              <h5 className="text-xs font-medium text-gray-700 uppercase tracking-wide">
+              <h5 className="text-xs font-medium tracking-wide text-gray-700 uppercase">
                 Assigned Features:
               </h5>
               <div className="flex flex-wrap gap-1">
                 {role.features?.map((feature, featureIndex) => (
                   <span
                     key={featureIndex}
-                    className="inline-flex items-center px-2 py-1 rounded text-xs bg-green-100 text-green-800"
+                    className="inline-flex items-center rounded bg-green-100 px-2 py-1 text-xs text-green-800"
                   >
                     {feature}
                     <button
@@ -97,7 +97,7 @@ export function RolesTab({
                         e.stopPropagation();
                         onUpdatePermission(role.name, feature, "none");
                       }}
-                      className="ml-1 text-green-600 hover:text-green-800 text-xs"
+                      className="ml-1 text-xs text-green-600 hover:text-green-800"
                       title="Remove feature from role"
                     >
                       ×
@@ -116,17 +116,17 @@ export function RolesTab({
       </div>
 
       {roles.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-gray-400 mb-4">👥</div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+        <div className="py-12 text-center">
+          <div className="mb-4 text-gray-400">👥</div>
+          <h3 className="mb-2 text-lg font-medium text-gray-900">
             No roles yet
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="mb-4 text-gray-600">
             Add user roles to define access levels.
           </p>
           <button
             onClick={onAddRole}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
           >
             Add Role
           </button>

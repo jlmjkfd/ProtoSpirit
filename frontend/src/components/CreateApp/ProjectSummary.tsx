@@ -14,7 +14,7 @@ export function ProjectSummary({
   return (
     <div className="p-6 text-center">
       {/* Success Icon */}
-      <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+      <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
         <svg
           className="h-8 w-8 text-green-600"
           fill="none"
@@ -31,23 +31,23 @@ export function ProjectSummary({
       </div>
 
       {/* Success Message */}
-      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+      <h3 className="mb-2 text-2xl font-bold text-gray-900">
         🎉 Your App is Ready!
       </h3>
-      <p className="text-lg text-gray-600 mb-8">
+      <p className="mb-8 text-lg text-gray-600">
         "{project.appName}" has been successfully created with all your
         requirements.
       </p>
 
       {/* Project Summary */}
-      <div className="bg-gray-50 rounded-lg p-6 mb-8 text-left">
-        <h4 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="mb-8 rounded-lg bg-gray-50 p-6 text-left">
+        <h4 className="mb-4 text-lg font-semibold text-gray-900">
           Project Summary
         </h4>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <h5 className="font-medium text-gray-700 mb-2">
+            <h5 className="mb-2 font-medium text-gray-700">
               Data Entities ({project.entities.length})
             </h5>
             <ul className="space-y-1">
@@ -57,7 +57,7 @@ export function ProjectSummary({
                   className="flex items-center text-sm text-gray-600"
                 >
                   <svg
-                    className="h-4 w-4 text-blue-500 mr-2"
+                    className="mr-2 h-4 w-4 text-blue-500"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -74,7 +74,7 @@ export function ProjectSummary({
           </div>
 
           <div>
-            <h5 className="font-medium text-gray-700 mb-2">
+            <h5 className="mb-2 font-medium text-gray-700">
               User Roles ({project.roles.length})
             </h5>
             <ul className="space-y-1">
@@ -84,7 +84,7 @@ export function ProjectSummary({
                   className="flex items-center text-sm text-gray-600"
                 >
                   <svg
-                    className="h-4 w-4 text-green-500 mr-2"
+                    className="mr-2 h-4 w-4 text-green-500"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -102,17 +102,17 @@ export function ProjectSummary({
         </div>
 
         <div className="mt-6">
-          <h5 className="font-medium text-gray-700 mb-2">
+          <h5 className="mb-2 font-medium text-gray-700">
             Features ({project.features.length})
           </h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+          <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
             {project.features.map((feature, index) => (
               <div
                 key={index}
                 className="flex items-center text-sm text-gray-600"
               >
                 <svg
-                  className="h-4 w-4 text-purple-500 mr-2"
+                  className="mr-2 h-4 w-4 text-purple-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -130,17 +130,17 @@ export function ProjectSummary({
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <div className="flex flex-col justify-center gap-4 sm:flex-row">
         <button
           onClick={onGoToProject}
-          className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          className="rounded-lg bg-blue-600 px-8 py-3 font-medium text-white transition-colors hover:bg-blue-700"
         >
           View Project Details
         </button>
 
         <button
           onClick={onStartOver}
-          className="px-8 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+          className="rounded-lg border border-gray-300 px-8 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
           Create Another App
         </button>

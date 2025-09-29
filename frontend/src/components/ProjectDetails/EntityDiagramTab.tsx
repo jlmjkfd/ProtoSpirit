@@ -425,7 +425,7 @@ export function EntityDiagramTab({
   }, [nodes, setNodes]);
 
   return (
-    <div className="w-full h-[800px] bg-gray-50 rounded-lg border border-gray-200 relative">
+    <div className="relative h-[800px] w-full rounded-lg border border-gray-200 bg-gray-50">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -442,17 +442,17 @@ export function EntityDiagramTab({
 
       {/* Simple Toolbar */}
       <div className="absolute top-4 left-4 z-10">
-        <div className="bg-white rounded-lg shadow-md p-3 border border-gray-200">
-          <div className="flex items-center space-x-2 mb-2">
+        <div className="rounded-lg border border-gray-200 bg-white p-3 shadow-md">
+          <div className="mb-2 flex items-center space-x-2">
             <button
               onClick={handleAddEntity}
-              className="px-3 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium"
+              className="rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
             >
               Add Entity
             </button>
             <button
               onClick={autoLayout}
-              className="px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+              className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
             >
               Auto Layout
             </button>

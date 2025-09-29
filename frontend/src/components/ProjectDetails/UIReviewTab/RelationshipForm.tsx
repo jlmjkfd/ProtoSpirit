@@ -1,7 +1,11 @@
 interface RelationshipFormProps {
   showRelationshipView: any;
   relationshipFormData: Record<string, any>;
-  setRelationshipFormData: (data: Record<string, any> | ((prev: Record<string, any>) => Record<string, any>)) => void;
+  setRelationshipFormData: (
+    data:
+      | Record<string, any>
+      | ((prev: Record<string, any>) => Record<string, any>)
+  ) => void;
   setShowRelationshipForm: (show: boolean) => void;
 }
 
@@ -9,15 +13,12 @@ export function RelationshipForm({
   showRelationshipView,
   relationshipFormData,
   setRelationshipFormData,
-  setShowRelationshipForm
+  setShowRelationshipForm,
 }: RelationshipFormProps) {
   if (!showRelationshipView) return null;
 
   const feature = showRelationshipView;
-  const [entity1, entity2] = feature.relatedEntities || [
-    "Entity1",
-    "Entity2",
-  ];
+  const [entity1, entity2] = feature.relatedEntities || ["Entity1", "Entity2"];
 
   // Generate sample options for dropdowns
   const entity1Options = Array.from(
@@ -30,19 +31,19 @@ export function RelationshipForm({
   );
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-lg max-w-2xl mx-auto">
+    <div className="mx-auto max-w-2xl rounded-lg border border-gray-200 bg-white shadow-lg">
       {/* Form Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-4 rounded-t-lg">
+      <div className="rounded-t-lg bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-4 text-white">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold flex items-center">
+          <h3 className="flex items-center text-lg font-semibold">
             Add {feature.name}
           </h3>
           <button
             onClick={() => setShowRelationshipForm(false)}
-            className="text-white hover:bg-white/20 rounded-md p-1 transition-colors"
+            className="rounded-md p-1 text-white transition-colors hover:bg-white/20"
           >
             <svg
-              className="w-5 h-5"
+              className="h-5 w-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -60,12 +61,12 @@ export function RelationshipForm({
 
       {/* Form Content */}
       <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* Entity 1 Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Select {entity1}
-              <span className="text-red-500 ml-1">*</span>
+              <span className="ml-1 text-red-500">*</span>
             </label>
             <select
               value={relationshipFormData[entity1.toLowerCase()] || ""}
@@ -75,7 +76,7 @@ export function RelationshipForm({
                   [entity1.toLowerCase()]: e.target.value,
                 }))
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               required
             >
               <option value="">Choose {entity1}</option>
@@ -89,9 +90,9 @@ export function RelationshipForm({
 
           {/* Entity 2 Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Select {entity2}
-              <span className="text-red-500 ml-1">*</span>
+              <span className="ml-1 text-red-500">*</span>
             </label>
             <select
               value={relationshipFormData[entity2.toLowerCase()] || ""}
@@ -101,7 +102,7 @@ export function RelationshipForm({
                   [entity2.toLowerCase()]: e.target.value,
                 }))
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               required
             >
               <option value="">Choose {entity2}</option>
@@ -115,7 +116,7 @@ export function RelationshipForm({
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Status
             </label>
             <select
@@ -126,7 +127,7 @@ export function RelationshipForm({
                   status: e.target.value,
                 }))
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
             >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
@@ -136,7 +137,7 @@ export function RelationshipForm({
 
           {/* Start Date */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Start Date
             </label>
             <input
@@ -151,14 +152,14 @@ export function RelationshipForm({
                   startDate: e.target.value,
                 }))
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Notes */}
         <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="mb-2 block text-sm font-medium text-gray-700">
             Notes (Optional)
           </label>
           <textarea
@@ -170,7 +171,7 @@ export function RelationshipForm({
               }))
             }
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none"
             placeholder={`Enter any additional notes about this ${feature.name.toLowerCase()}...`}
           />
         </div>
@@ -179,16 +180,14 @@ export function RelationshipForm({
         <div className="mt-6 flex items-center justify-between">
           <button
             onClick={() => setShowRelationshipForm(false)}
-            className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+            className="rounded-md border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
           >
             Cancel
           </button>
           <button
             onClick={() => {
-              const entity1Value =
-                relationshipFormData[entity1.toLowerCase()];
-              const entity2Value =
-                relationshipFormData[entity2.toLowerCase()];
+              const entity1Value = relationshipFormData[entity1.toLowerCase()];
+              const entity2Value = relationshipFormData[entity2.toLowerCase()];
 
               if (!entity1Value || !entity2Value) {
                 alert("Please select both entities");
@@ -205,7 +204,7 @@ export function RelationshipForm({
               setShowRelationshipForm(false);
               setRelationshipFormData({});
             }}
-            className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+            className="rounded-md bg-purple-600 px-4 py-2 text-white transition-colors hover:bg-purple-700"
           >
             Create {feature.name}
           </button>

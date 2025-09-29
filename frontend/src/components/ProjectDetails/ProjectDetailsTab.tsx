@@ -278,7 +278,6 @@ export function ProjectDetailsTab({
     setEditingFeature(feature);
   };
 
-
   const handleDeleteFeature = (featureName: string) => {
     if (
       confirm(
@@ -392,21 +391,21 @@ export function ProjectDetailsTab({
     <div className="p-6">
       {/* Sub-navigation */}
       <div className="mb-6">
-        <nav className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+        <nav className="flex space-x-1 rounded-lg bg-gray-100 p-1">
           {managementSections.map((section) => (
             <button
               key={section.id}
               onClick={() => setActiveSection(section.id as ManagementSection)}
-              className={`flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+              className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                 activeSection === section.id
                   ? "bg-white text-blue-600 shadow-sm"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
               }`}
             >
               {section.name}
               {section.count !== undefined && (
                 <span
-                  className={`ml-2 px-2 py-0.5 text-xs rounded-full ${
+                  className={`ml-2 rounded-full px-2 py-0.5 text-xs ${
                     activeSection === section.id
                       ? "bg-blue-100 text-blue-600"
                       : "bg-gray-200 text-gray-600"
@@ -421,7 +420,7 @@ export function ProjectDetailsTab({
       </div>
 
       {/* Management Content */}
-      <div className="bg-gray-50 rounded-lg min-h-[400px]">
+      <div className="min-h-[400px] rounded-lg bg-gray-50">
         {activeSection === "basic" && (
           <BasicSettings
             project={project}
@@ -498,10 +497,12 @@ export function ProjectDetailsTab({
           }}
           entities={projectData.entities}
           roles={projectData.roles}
-          isNew={!projectData.features.find((f) => {
-            const existingId = typeof f === "string" ? null : f.id;
-            return existingId === editingFeature.id;
-          })}
+          isNew={
+            !projectData.features.find((f) => {
+              const existingId = typeof f === "string" ? null : f.id;
+              return existingId === editingFeature.id;
+            })
+          }
         />
       )}
     </div>
