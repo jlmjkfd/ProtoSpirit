@@ -25,9 +25,19 @@ app.get("/health", (req: express.Request, res: express.Response) => {
   });
 });
 
+// Debug middleware to log all requests
+app.use((req: express.Request, res: express.Response, next: () => void) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl}`);
+  console.log('Headers:', JSON.stringify(req.headers, null, 2));
+  next();
+});
+
 // API Routes
+console.log("Registering auth routes at /api/auth");
 app.use("/api/auth", authRoutes);
+console.log("Registering requirements routes at /api/requirements");
 app.use("/api/requirements", requirementsRoutes);
+console.log("Registering projects routes at /api/projects");
 app.use("/api/projects", projectsRoutes);
 
 // 404 handler for unknown routes

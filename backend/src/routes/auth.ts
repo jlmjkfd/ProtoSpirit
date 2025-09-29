@@ -4,7 +4,10 @@ import { generateToken, authenticate, AuthRequest } from '../middleware/auth';
 
 const router = Router();
 
+console.log("Auth router created and registering routes...");
+
 // POST /api/auth/login
+console.log("Registering POST /login route");
 router.post('/login', async (req: Request, res: Response) => {
   try {
     const { identifier, password } = req.body;
