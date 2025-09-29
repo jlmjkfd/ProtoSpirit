@@ -31,7 +31,8 @@ class ApiService {
     this.api.interceptors.response.use(
       (response) => response,
       (error) => {
-        if (error.response?.status === 401) {
+        // Only redirect to login if it's a 401 on a protected route (not login itself)
+        if (error.response?.status === 401 && !error.config?.url?.includes('/auth/login')) {
           this.clearAuth();
           window.location.href = "/login";
         }
@@ -53,19 +54,27 @@ class ApiService {
 
   // Auth endpoints
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response: AxiosResponse<AuthResponse> = await this.api.post(
-      "/auth/login",
-      credentials
-    );
+    try {
+      const response: AxiosResponse<AuthResponse> = await this.api.post(
+        "/auth/login",
+        credentials
+      );
 
-    if (response.data.success && response.data.data.token) {
-      this.token = response.data.data.token;
-      localStorage.setItem("token", this.token);
-      localStorage.setItem("user", JSON.stringify(response.data.data.user));
-      this.setAuthHeader(this.token);
+      if (response.data.success && response.data.data.token) {
+        this.token = response.data.data.token;
+        localStorage.setItem("token", this.token);
+        localStorage.setItem("user", JSON.stringify(response.data.data.user));
+        this.setAuthHeader(this.token);
+      }
+
+      return response.data;
+    } catch (error) {
+      // Re-throw with proper error message from backend
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        throw new Error(error.response.data.error);
+      }
+      throw error;
     }
-
-    return response.data;
   }
 
   async logout(): Promise<void> {

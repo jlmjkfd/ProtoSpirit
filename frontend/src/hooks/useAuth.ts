@@ -68,11 +68,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     } catch (error: unknown) {
       console.error("Login error:", error);
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : (error as { response?: { data?: { error?: string } } })?.response
-              ?.data?.error || "Login failed";
+
+      // Handle Axios errors specifically
+      if (error && typeof error === 'object' && 'response' in error) {
+        const axiosError = error as any;
+        const backendMessage = axiosError.response?.data?.error;
+        if (backendMessage) {
+          throw new Error(backendMessage);
+        }
+      }
+
+      // Handle other error types
+      const errorMessage = error instanceof Error ? error.message : "Login failed";
       throw new Error(errorMessage);
     } finally {
       setIsLoading(false);
