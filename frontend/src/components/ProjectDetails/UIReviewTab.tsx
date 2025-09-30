@@ -175,6 +175,22 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
       return [];
 
     const [entity1, entity2] = feature.relatedEntities;
+
+    // Validate that both entities exist in the project
+    const entity1Exists = project.entities.some(e => e.name === entity1);
+    const entity2Exists = project.entities.some(e => e.name === entity2);
+
+    if (!entity1Exists || !entity2Exists) {
+      console.warn(`Relationship feature "${feature.name}" references non-existent entities:`, {
+        entity1: entity1,
+        entity1Exists,
+        entity2: entity2,
+        entity2Exists,
+        availableEntities: project.entities.map(e => e.name)
+      });
+      return [];
+    }
+
     const sampleData = [];
 
     // Generate 3-5 sample relationship pairs
@@ -263,12 +279,14 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
           navigateBack={navigateBack}
           setShowRelationshipForm={setShowRelationshipForm}
           setRelationshipFormData={setRelationshipFormData}
+          project={project}
           renderRelationshipForm={() => (
             <RelationshipForm
               showRelationshipView={showRelationshipView}
               relationshipFormData={relationshipFormData}
               setRelationshipFormData={setRelationshipFormData}
               setShowRelationshipForm={setShowRelationshipForm}
+              project={project}
             />
           )}
         />
@@ -331,12 +349,14 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
           navigateBack={navigateBack}
           setShowRelationshipForm={setShowRelationshipForm}
           setRelationshipFormData={setRelationshipFormData}
+          project={project}
           renderRelationshipForm={() => (
             <RelationshipForm
               showRelationshipView={showRelationshipView}
               relationshipFormData={relationshipFormData}
               setRelationshipFormData={setRelationshipFormData}
               setShowRelationshipForm={setShowRelationshipForm}
+              project={project}
             />
           )}
         />

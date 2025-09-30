@@ -13,6 +13,7 @@ interface RelationshipManagementProps {
   setShowRelationshipForm: (show: boolean) => void;
   setRelationshipFormData: (data: Record<string, any>) => void;
   renderRelationshipForm: () => React.ReactNode;
+  project: any; // Add project prop for entity validation
 }
 
 export function RelationshipManagement({
@@ -27,6 +28,7 @@ export function RelationshipManagement({
   setShowRelationshipForm,
   setRelationshipFormData,
   renderRelationshipForm,
+  project,
 }: RelationshipManagementProps) {
   if (!showRelationshipView) return null;
 
@@ -35,8 +37,43 @@ export function RelationshipManagement({
   const relationshipData = generateRelationshipData(feature);
   const [entity1, entity2] = feature.relatedEntities || ["Entity1", "Entity2"];
 
+  // Ensure entity names are strings and not undefined
+  // If there's only one entity, use relationship name for the missing one
+  const safeEntity1 = entity1 || "Entity1";
+  const safeEntity2 = entity2 || (feature.name ? feature.name.replace(/[-_]/g, ' ') : "Entity2");
+
+  // Check which entities exist in the project
+  const entity1Exists = project.entities.some((e: any) => e.name === safeEntity1);
+  const entity2Exists = project.entities.some((e: any) => e.name === safeEntity2);
+
+  // Determine if we should show warning (only if both entities are missing)
+  const shouldShowWarning = !entity1Exists && !entity2Exists;
+
   return (
     <div className="p-6">
+      {/* Show warning only if both entities are missing */}
+      {shouldShowWarning && (
+        <div className="mb-6 rounded-md bg-yellow-50 border border-yellow-200 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-yellow-800">Missing Entities</h3>
+              <div className="mt-2 text-sm text-yellow-700">
+                <p>
+                  This relationship feature references entities that don't exist in your project:
+                  <span className="font-medium"> {safeEntity1}</span> and <span className="font-medium"> {safeEntity2}</span>
+                </p>
+                <p className="mt-1">You can create relationships by entering the entity names manually.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h2 className="mb-2 flex items-center text-2xl font-bold text-gray-900">
@@ -44,7 +81,7 @@ export function RelationshipManagement({
           </h2>
           <p className="text-gray-600">
             {feature.description ||
-              `Manage relationships between ${entity1} and ${entity2}`}
+              `Manage relationships between ${safeEntity1} and ${safeEntity2}`}
           </p>
         </div>
         <div className="flex space-x-2">
@@ -83,10 +120,10 @@ export function RelationshipManagement({
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  {entity1}
+                  {safeEntity1}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                  {entity2}
+                  {safeEntity2}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                   Status
