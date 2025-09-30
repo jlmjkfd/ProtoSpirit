@@ -372,9 +372,9 @@ export function UIReviewTab({ project }: UIReviewTabProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold">{project.appName}</h1>
-              <span className="rounded-full bg-white/20 px-3 py-1 text-sm">
+              {/* <span className="rounded-full bg-white/20 px-3 py-1 text-sm">
                 Demo Mode
-              </span>
+              </span> */}
             </div>
 
             {/* Role Switcher */}
