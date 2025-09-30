@@ -100,8 +100,8 @@ export function ProjectDetails() {
   };
 
   const tabs = [
-    { id: "details", name: "Project Details" },
     { id: "preview", name: "UI Preview", special: true },
+    { id: "details", name: "Project Details" },
     { id: "diagram", name: "Entity Diagram" },
   ];
 
