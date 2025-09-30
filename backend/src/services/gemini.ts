@@ -162,11 +162,13 @@ export class GeminiProvider {
             category: {
               type: Type.STRING,
               enum: ["entity", "relationship"],
-              description: "Feature category: entity (CRUD operations) or relationship (associations between entities)",
+              description:
+                "Feature category: entity (CRUD operations) or relationship (associations between entities)",
             },
             relatedEntities: {
               type: Type.ARRAY,
-              description: "For relationship features: array of entity names involved in the relationship",
+              description:
+                "For relationship features: array of entity names involved in the relationship",
               items: {
                 type: Type.STRING,
                 minLength: "1",
@@ -174,7 +176,8 @@ export class GeminiProvider {
             },
             showInEntityLists: {
               type: Type.ARRAY,
-              description: "For relationship features: which entity lists should show this relationship button",
+              description:
+                "For relationship features: which entity lists should show this relationship button",
               items: {
                 type: Type.STRING,
                 minLength: "1",
@@ -197,7 +200,8 @@ export class GeminiProvider {
                     items: {
                       type: Type.STRING,
                       enum: ["full", "read"],
-                      description: "Permission level: 'full' (create/read/update/delete) or 'read' (read-only)",
+                      description:
+                        "Permission level: 'full' (create/read/update/delete) or 'read' (read-only)",
                     },
                   },
                 },
@@ -231,13 +235,14 @@ ENTITY IDENTIFICATION RULES:
 
 ENTITY DESIGN:
 - Focus on core independent entities only
+- Including implicit necessary entities
 - Add relevant fields for each entity (name, email, dates, etc.)
 - Use appropriate field types: text, email, number, date, boolean, select, textarea
 - Mark fields as required based on business logic
 - Add metadata with descriptions
 
 AVOID THESE ENTITY MISTAKES:
-❌ Don't create entities for: Enrollment, Registration, Assignment, Attendance, Grade, Rating, Review, Booking, Reservation
+❌ Don't create entities for actions like: Enrollment, Registration, Assignment, Attendance, Grade, Rating, Review, Booking, Reservation
 ✅ These are relationships between real entities
 ❌ "Enrollment Management" → ✅ "Student Enrollment" (relationship)
 ❌ "Grade Management" → ✅ "Grade Assignment" (relationship)
@@ -252,9 +257,9 @@ RELATIONSHIP IDENTIFICATION:
 
 RELATIONSHIP PATTERNS:
 - Define relationships unidirectionally (avoid duplicates)
+- Three types: one-to-one, one-to-many, many-to-many
 - Use "one-to-many" instead of "many-to-one"
-- For many-to-many with extra data, create junction entities
-- Examples: User → Orders (one-to-many), Student ↔ Course → StudentEnrollment (junction)
+- Examples: User → Orders (one-to-many), Student ↔ Course (many-to-many)
 
 FEATURE GENERATION:
 - Create ONE feature per entity: "[entity]-management" (e.g., "student-management", "course-management", "order-management")
@@ -413,7 +418,13 @@ ${description}`,
   /**
    * Get Gemini-specific model information
    */
-  getModelInfo(): { provider: string; model: string; version: string; capabilities: string[]; temperature: number; } {
+  getModelInfo(): {
+    provider: string;
+    model: string;
+    version: string;
+    capabilities: string[];
+    temperature: number;
+  } {
     return {
       provider: "Google Gemini",
       model: this.config.model,
