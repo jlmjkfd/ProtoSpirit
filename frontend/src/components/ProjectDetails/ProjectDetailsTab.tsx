@@ -133,9 +133,27 @@ export function ProjectDetailsTab({
       );
     }
 
+    // Auto-create entity feature for new entities
+    let updatedFeatures = [...projectData.features];
+    if (isNewEntity) {
+      const entityFeature: Feature = {
+        id: `${updatedEntity.name.toLowerCase().replace(/\s+/g, '-')}-management`,
+        name: `${updatedEntity.name} Management`,
+        description: `Manage ${updatedEntity.name} records`,
+        category: 'entity',
+        entityTarget: updatedEntity.name,
+        permissions: projectData.roles.map(role => ({
+          role: role.name,
+          actions: role.name.toLowerCase().includes('admin') ? ['full' as const] : ['read' as const]
+        }))
+      };
+      updatedFeatures = [...updatedFeatures, entityFeature];
+    }
+
     const updatedProjectData = {
       ...projectData,
       entities: updatedEntities,
+      features: updatedFeatures,
     };
 
     setProjectData(updatedProjectData);

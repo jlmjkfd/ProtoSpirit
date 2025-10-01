@@ -36,7 +36,7 @@ export function EntityList({
   if (!entity) return null;
 
   const sampleData = generateSampleData(entityName);
-  const displayFields = entity.fields?.slice(0, 4) || []; // Show first 4 fields
+  const displayFields = entity.fields || []; // Show all fields
 
   return (
     <div className="p-6">

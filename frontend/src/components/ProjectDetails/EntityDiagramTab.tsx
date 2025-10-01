@@ -9,7 +9,7 @@ import ReactFlow, {
 } from "reactflow";
 import type { Node, Edge, Connection } from "reactflow";
 import "reactflow/dist/style.css";
-import type { Project, Entity, EntityRelationship } from "../../types";
+import type { Project, Entity, EntityRelationship, Feature } from "../../types";
 import { EntityNodeComponent } from "./EntityDiagram/EntityNode";
 import { EntityEditModal } from "./modals/EntityEditModal";
 
@@ -228,9 +228,27 @@ export function EntityDiagramTab({
         );
       }
 
+      // Auto-create entity feature for new entities
+      let updatedFeatures = [...project.features];
+      if (isNewEntity) {
+        const entityFeature: Feature = {
+          id: `${updatedEntity.name.toLowerCase().replace(/\s+/g, '-')}-management`,
+          name: `${updatedEntity.name} Management`,
+          description: `Manage ${updatedEntity.name} records`,
+          category: 'entity',
+          entityTarget: updatedEntity.name,
+          permissions: project.roles.map(role => ({
+            role: role.name,
+            actions: role.name.toLowerCase().includes('admin') ? ['full' as const] : ['read' as const]
+          }))
+        };
+        updatedFeatures = [...updatedFeatures, entityFeature];
+      }
+
       const updatedProject = {
         ...project,
         entities: updatedEntities,
+        features: updatedFeatures,
       };
 
       onUpdateProject(updatedProject);

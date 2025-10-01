@@ -86,6 +86,8 @@ export function ProjectDetails() {
         appName: updatedProject.appName,
         description: updatedProject.description,
         entities: updatedProject.entities,
+        roles: updatedProject.roles,
+        features: updatedProject.features,
       });
 
       if (!response.success) {
